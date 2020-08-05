@@ -1,0 +1,32 @@
+{
+  "name": "project_greenfield_starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/styles": "^4.10.0",
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "create-react-hook": "^3.0.2",
+    "express": "^4.17.1",
+    "jquery": "^3.5.1",
+    "lodash": "^4.17.19",
+    "mongoose": "^5.9.27",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.1.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^4.44.1"
+  }
+}
