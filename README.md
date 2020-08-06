@@ -63,7 +63,7 @@ npm run react-dev
 * [MaterialUI](https://material-ui.com/getting-started/installation/) - The css framework used
 * [Axios](https://www.npmjs.com/package/axios) - The front-end http request handler
 * [Express](https://expressjs.com/2x/guide.html) - The back-end http request handler
-* [Jest](https://jestjs.io/docs/en/getting-started) - The javascript testing framework and code coverage
+* [Jest](https://jestjs.io/docs/en/tutorial-react) - The javascript testing framework and code coverage
 * [Enzyme](https://github.com/enzymejs/enzyme) - The javascript testing utility
 
 ## Contributing
