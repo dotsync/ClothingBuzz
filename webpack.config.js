@@ -1,5 +1,5 @@
 module.exports = {
-  entry: __dirname + 'ratings_reviews/client/src/index.jsx',
+  entry: __dirname + '/client/src/index.jsx',
   module: {
     rules: [
       {
@@ -16,6 +16,6 @@ module.exports = {
   },
    output: {
     filename: 'bundle.js',
-    path: __dirname + 'ratings_reviews/client/dist/index.html'
+    path: __dirname + '/client/dist'
   }
 };
