@@ -8,6 +8,14 @@
     "react-dev": "webpack -d --watch",
     "start": "nodemon server/index.js"
   },
+  "jest": {
+    "setupFiles": [
+      "./setup-tests.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -28,6 +36,7 @@
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
+    "@testing-library/react": "^10.4.8",
     "babel-core": "^6.26.3",
     "babel-jest": "^26.2.2",
     "babel-loader": "^8.1.0",
@@ -36,6 +45,7 @@
     "babel-preset-react": "^6.24.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.5.0",
     "eslint": "^7.6.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.0",

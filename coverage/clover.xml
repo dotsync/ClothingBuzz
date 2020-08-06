@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1596737656687" clover="3.2.0">
-  <project timestamp="1596737656687" name="All files">
-    <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1" elements="3" coveredelements="3" complexity="0" loc="2" ncloc="2" packages="1" files="1" classes="1"/>
-    <file name="App.jsx" path="/Users/sergeiliddell/greenfield/ratings-and-reviews_service/client/src/components/App.jsx">
+<coverage generated="1596752765900" clover="3.2.0">
+  <project timestamp="1596752765900" name="All files">
+    <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2" elements="6" coveredelements="6" complexity="0" loc="4" ncloc="4" packages="2" files="2" classes="2"/>
+    <package name="components">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <line num="3" count="1" type="stmt"/>
-      <line num="4" count="1" type="stmt"/>
-    </file>
+      <file name="App.jsx" path="/Users/sergeiliddell/greenfield/ratings-and-reviews_service/client/src/components/App.jsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="components.reviews-list">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="ReviewsList.jsx" path="/Users/sergeiliddell/greenfield/ratings-and-reviews_service/client/src/components/reviews-list/ReviewsList.jsx">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="6" type="stmt"/>
+      </file>
+    </package>
   </project>
 </coverage>
