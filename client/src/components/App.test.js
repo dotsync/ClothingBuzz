@@ -7,7 +7,7 @@ import App from './App';
 
 configure({ adapter: new Adapter() });
 
-test('Should contain the title Hello, World', () => {
+test('Should contain the title: RATINGS & REVIEWS', () => {
   const wrapper = shallow(<App />);
-  expect(wrapper.find('#title').text()).toBe('Hello, World');
+  expect(wrapper.find('#service-title').text()).toBe('RATINGS & REVIEWS');
 });
