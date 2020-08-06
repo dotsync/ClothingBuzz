@@ -41,3 +41,6 @@ describe('ReviewsList component when there are more than 2 reviews', () => {
     // does 1 tile render per review?
   });
 });
+
+// TODO: if no reviews have been submitted the list will collapse and a button to
+// sumbit a new review will appear near the top
