@@ -2,7 +2,7 @@ import React from 'react';
 
 const App = () => (
   <div>
-    <h1 id="title">Hello, World</h1>
+    <h1 id="service-title">RATINGS & REVIEWS</h1>
   </div>
 );
 
