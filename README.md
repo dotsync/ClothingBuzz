@@ -18,19 +18,18 @@ npm install
 
 A step by step series of examples that tell you how to get a development env running
 
-Say what the step will be
+Enter root directory
 
 ```
-Give the example
+cd ratings-and-reviews_service
 ```
 
-And repeat
+Install dependencies
 
 ```
-until finished
+npm install
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
@@ -44,17 +43,18 @@ Explain what these tests test and why
 Give an example
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
 ## Deployment
+Start server with nodemon
 
-Add additional notes about how to deploy this on a live system
+```
+npm start
+```
+Start webpack for react
+
+```
+npm run react-dev
+```
+
 
 ## Built With
 
@@ -72,20 +72,14 @@ Please read [Git Feature Branch Workflow](https://www.atlassian.com/git/tutorial
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+For the versions available, see the [Greenfield Remodel](https://github.com/GreenfieldRemodel/ratings-and-reviews_service).
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Sergei Liddell** - *Initial work* - [dotsync](https://github.com/dotsync)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Special thanks to, Billie Thompson - *README template* - [PurpleBooth](https://github.com/PurpleBooth)
