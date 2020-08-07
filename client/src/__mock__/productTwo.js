@@ -10,7 +10,7 @@ page	            integer         Selects the page of results to return. Default 
 count	            integer	        Specifies how many results per page to return. Default 5.
 sort	            text	          Changes the sort order of reviews to be based on "newest", "helpful", or "relevant" */
 
-const data = {
+const data = [{
   product: '2',
   page: 0,
   count: 5,
@@ -50,5 +50,5 @@ const data = {
     },
     // ...
   ],
-}
+}];
 export default data;
