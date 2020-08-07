@@ -17,7 +17,7 @@ describe('Each tile', () => {
   });
 
   test('should have a rating', () => {
-    expect(wrapper.find('#review-rating').number()).toBe(5);
+    expect(wrapper.find('#review-rating').text()).toBe('5');
   });
 
   test('should have a date', () => {
