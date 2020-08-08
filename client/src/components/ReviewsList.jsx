@@ -9,13 +9,17 @@ function ReviewsList() {
   const api = 'http://52.26.193.201:3000';
 
   const [productId, setProductId] = useState(2);
+  const [reviews, setReviews] = useState([]);
+  console.log('state: reviews', reviews);
 
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(`${api}/reviews/${productId}/list`);
-      const reviews = await response.json();
+      const product = await response.json();
       // console.log(response);
-      // console.log('reviews', reviews);
+      // console.log('product.results', product.results);
+      // set state of reviews to be product.results
+      setReviews(product.results);
     }
     // call immediatly
     fetchData();
