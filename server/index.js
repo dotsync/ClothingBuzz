@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-console */
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -23,5 +24,5 @@ app.use(express.static(`${__dirname}/../client/dist`));
 // delete the review but the review will not be returned in the GET list request.
 
 app.listen(PORT, () => {
-  console.log(`listening on port ${PORT}`);
+  console.log(`listening on port ${PORT}...`);
 });

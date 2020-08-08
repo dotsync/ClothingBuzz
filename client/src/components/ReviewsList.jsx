@@ -14,12 +14,16 @@ function ReviewsList() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`${api}/reviews/${productId}/list`);
-      const product = await response.json();
-      // console.log(response);
-      // console.log('product.results', product.results);
-      // update state of reviews
-      setReviews(product.results);
+      try {
+        const response = await fetch(`${api}/reviews/${productId}/list`);
+        const product = await response.json();
+        // console.log(response);
+        // console.log('product.results', product.results);
+        // update state of reviews
+        setReviews(product.results);
+      } catch (err) {
+        console.log(err);
+      }
     }
     // call immediatly
     fetchData();
