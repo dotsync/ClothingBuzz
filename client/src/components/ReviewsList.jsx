@@ -18,7 +18,7 @@ function ReviewsList() {
       const product = await response.json();
       // console.log(response);
       // console.log('product.results', product.results);
-      // set state of reviews to be product.results
+      // update state of reviews
       setReviews(product.results);
     }
     // call immediatly
