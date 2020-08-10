@@ -1,9 +1,10 @@
+/* eslint-disable react/prefer-stateless-function */
 import React from 'react';
+import ReviewsList from './ReviewsList.jsx';
 
-const App = () => (
-  <div>
-    <h1 id="service-title">RATINGS & REVIEWS</h1>
-  </div>
-);
-
+function App(props) {
+  return (
+    <ReviewsList />
+  );
+}
 export default App;
