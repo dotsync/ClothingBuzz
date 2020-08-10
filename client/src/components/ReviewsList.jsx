@@ -56,6 +56,10 @@ function ReviewsList(props) {
             reviews={reviews}
           />
         </div>
+        <div className="footer">
+          more reviews button | add review + button | socialmeadi icons
+          {/* <Footer /> */}
+        </div>
       </div>
     </div>
   );
