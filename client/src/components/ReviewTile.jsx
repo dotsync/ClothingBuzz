@@ -3,22 +3,9 @@
 import React, { useState } from 'react';
 
 // material ui
-import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1
-  },
-  paper: {
-    height: 300,
-    width: 500,
-  },
-  control: {
-    padding: theme.spacing(2)
-  }
-}));
-
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
 function ReviewTile(props) {
   const thisProductsReviews = props.reviews;
@@ -26,33 +13,52 @@ function ReviewTile(props) {
   const [productId, setProductId] = useState(2);
   // msterial ui classes
   const [spacing, setSpacing] = React.useState(2);
-  const classes = useStyles();
 
   // conditional render
   if (props.reviews.length === 0) {
     return <div>Loading...</div>;
   }
   return (
-    <Grid className="reviews">
+    <Grid container>
       {/* console.log('Props were passed to child componenet', thisProductsReviews) */}
-      <div className="review-tile">
-        <Grid className="review-top">
-          <div className="review-stars" />
-          <div>{thisProductsReviews[productId].rating}</div>
-          <div className="review-date" />
+      {console.log(' For development, Refer to these props at thisProductsReviews[productId]', thisProductsReviews[productId])}
+      <Grid item>
+
+        {/* Review rating and date top bar */}
+        <Grid container>
+          <Grid item>
+            {thisProductsReviews[productId].rating}
+            {thisProductsReviews[productId].date}
+          </Grid>
         </Grid>
-        <Grid className="review-main">
-          <div className="review-summary" />
-          {thisProductsReviews[productId].summary}
-          <br />
-          <div className="review-body" />
-          {thisProductsReviews[productId].body}
+
+        {/* Review contents */}
+        <Grid container>
+          <Grid item>
+            {thisProductsReviews[productId].summary}
+          </Grid>
         </Grid>
-        <div>
-          <br />
-          <div className="review-report">Helpful? yes (9) | report</div>
-        </div>
-      </div>
+        <Grid container>
+          {thisProductsReviews[productId].recommend
+            ? <Grid>I recommend this product</Grid>
+            : <Grid>{console.log('product has not been recomended', thisProductsReviews[productId].recommend)}</Grid>}
+        </Grid>
+        <Grid container>
+          <Grid item>
+            {thisProductsReviews[productId].body}
+          </Grid>
+        </Grid>
+
+        {/* Report helpfullness grid */}
+        <Grid container>
+          <Grid item>
+            Helpful? yes (
+            {thisProductsReviews[productId].helpfulness}
+            ) | report
+          </Grid>
+        </Grid>
+        {/* closing container, and item tags */}
+      </Grid>
     </Grid>
   );
 }
