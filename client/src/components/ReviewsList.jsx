@@ -46,6 +46,7 @@ function ReviewsList(props) {
 
   return (
     <div className="ratings-and-reviews">
+      RATINGS AND REVIEWS
       <div className="col-left">
         {/* <StarRating /> */}
       </div>

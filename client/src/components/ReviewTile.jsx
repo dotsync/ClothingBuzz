@@ -4,26 +4,26 @@ import React, { useState } from 'react';
 
 function ReviewTile(props) {
   const thisProductsReviews = props.reviews;
+  // how do i get rid of the line below
+  const [productId, setProductId] = useState(2);
 
+  // conditional render
   if (props.reviews.length === 0) {
-    console.log('reviews is empty');
-  } else {
-    console.log(props.reviews[0].summary);
+    return <div>Loading...</div>;
   }
-
   return (
     <div className="reviews">
       {console.log('Props were passed to child componenet', thisProductsReviews)}
       <div className="review-tile">
         <div className="review-top">
           <div className="review-stars" />
-          <div>{console.log(props.reviews)}</div>
+          <div>{thisProductsReviews[productId].rating}</div>
           <div className="review-date" />
         </div>
         <div className="review-main">
-          <div className="review-summary" />
+          <div className="review-summary" /> {thisProductsReviews[productId].summary}
           <br />
-          <div className="review-body" />
+          <div className="review-body" /> {thisProductsReviews[productId].body}
         </div>
         <div>
           <br />
