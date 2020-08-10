@@ -10,7 +10,20 @@ function ReviewsList(props) {
   const api = 'http://52.26.193.201:3000';
   const [productId, setProductId] = useState(2);
   const [reviews, setReviews] = useState([]);
-  // console.log('state: reviews', reviews);
+  // state is not loaded at first
+  const [loaded, setLoaded] = useState(false);
+
+  // fetch product id
+  // useEffect(() => {
+  //   async function fetchProductId() {
+  //     try {
+  //       // setProductId
+  //     } catch (err) {
+  //       console.log(`fetchProductId ${err}`);
+  //     }
+  //   }
+  //   fetchProductId();
+  // }, []);
 
   useEffect(() => {
     async function fetchReviews() {
@@ -21,6 +34,8 @@ function ReviewsList(props) {
         // console.log('product.results', product.results);
         // update state of reviews
         setReviews(product.results);
+        // setLoaded = true so now props can safely render
+        setLoaded(true);
       } catch (err) {
         console.log(err);
       }
