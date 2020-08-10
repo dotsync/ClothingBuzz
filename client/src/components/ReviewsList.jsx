@@ -5,15 +5,15 @@ import ReviewTile from './ReviewTile.jsx';
 // need this line of code in order to run async funcs
 const regeneratorRuntime = require("regenerator-runtime");
 
-function ReviewsList() {
+function ReviewsList(props) {
+  // greenfield api
   const api = 'http://52.26.193.201:3000';
-
   const [productId, setProductId] = useState(2);
   const [reviews, setReviews] = useState([]);
-  console.log('state: reviews', reviews);
+  // console.log('state: reviews', reviews);
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchReviews() {
       try {
         const response = await fetch(`${api}/reviews/${productId}/list`);
         const product = await response.json();
@@ -26,18 +26,19 @@ function ReviewsList() {
       }
     }
     // call immediatly
-    fetchData();
+    fetchReviews();
   }, []);
 
   return (
-    <div className="reviews">
+    <div className="ratings-and-reviews">
       <div className="col-left">
         {/* <StarRating /> */}
       </div>
       <div className="col-right">
         <div className="review-tiles">
-          <ReviewTile />
-          <ReviewTile />
+          <ReviewTile
+            reviews={reviews}
+          />
         </div>
       </div>
     </div>

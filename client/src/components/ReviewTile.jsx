@@ -1,19 +1,23 @@
+/* eslint-disable no-console */
 /* eslint-disable react/prefer-stateless-function */
-import React from 'react';
+import React, { useState } from 'react';
 
-function ReviewTile() {
+function ReviewTile(props) {
+  const thisProductsReviews = props.reviews;
+
   return (
     <div className="reviews">
+      {console.log('Props were passed to child componenet', thisProductsReviews)}
       <div className="review-tile">
         <div className="review-top">
-          {/* {console.log('tile log')} */}
-          <div className="review-stars">5</div>
-          <div className="review-date">2019-01-01</div>
+          <div className="review-stars" />
+          <div>{props.reviews.summary}</div>
+          <div className="review-date" />
         </div>
         <div className="review-main">
-          <div className="review-summary">This product was great!</div>
+          <div className="review-summary" />
           <br />
-          <div className="review-body">I really did or did not like this product based on whether it was sustainably sourced.  Then I found out that its made from nothing at all.</div>
+          <div className="review-body" />
         </div>
         <div>
           <br />
@@ -25,3 +29,8 @@ function ReviewTile() {
 }
 
 export default ReviewTile;
+
+
+// try changing format of state
+// try reasearching mapping state to props
+// try code cademy

@@ -2,7 +2,7 @@
 import React from 'react';
 import ReviewsList from './ReviewsList.jsx';
 
-function App() {
+function App(props) {
   return (
     <ReviewsList />
   );
