@@ -7,10 +7,25 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Grid';
 
 import ReviewTile from './ReviewTile.jsx';
+import StarRating from './StarRating.jsx';
+import RatingsBreakdown from './RatingsBreakdown.jsx';
 import Footer from './Footer.jsx';
 // need this line of code in order to run async funcs
 const regeneratorRuntime = require('regenerator-runtime');
 
+// material ui styles
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
+
+// Main component
 function ReviewsList(props) {
   // greenfield api
   const api = 'http://52.26.193.201:3000';
@@ -18,6 +33,8 @@ function ReviewsList(props) {
   const [reviews, setReviews] = useState([]);
   // state is not loaded at first
   const [loaded, setLoaded] = useState(false);
+  // use material ui styles
+  const classes = useStyles();
 
   // fetch product id
   // useEffect(() => {
@@ -49,27 +66,35 @@ function ReviewsList(props) {
     // call immediatly
     fetchReviews();
   }, []);
-
+  const thisProductsReviews = reviews;
+  console.log('thisProductsReviews', thisProductsReviews)
   return (
-    <div className="ratings-and-reviews">
-      RATINGS AND REVIEWS
-      <Grid container>
-        <Grid item>
-          {/* <StarRating /> */}
-        </Grid>
+    <div className={classes.root}>
+      <Grid container xs={12}>
+        <h4>RATINGS AND REVIEWS</h4>
       </Grid>
-      <div className="col-right">
-        <Grid container>
+
+      {/* Left column grid */}
+      <Grid container spaceing={3}>
+        <Grid container xs={3}>
           <Grid item>
-            <ReviewTile
-              reviews={reviews}
-            />
+            <RatingsBreakdown />
           </Grid>
+          {/* add a product breakdown component here */}
         </Grid>
-      </div>
-      <div className="footer">
-        <Footer />
-      </div>
+
+        {/* Right column grid */}
+        <Grid item xs={9}>
+          {reviews.length > 0
+            // eslint-disable-next-line max-len
+            ? reviews.map((review, i) => (<Grid key={reviews[i].review_id}><ReviewTile reviews={reviews} />{console.log(reviews[i].review_id)}</Grid>))
+            : <Paper>Hang tight...</Paper>}
+        </Grid>
+
+        {/* Footer grid */}
+
+        {/* closing container, and item tags */}
+      </Grid>
     </div>
   );
 }
