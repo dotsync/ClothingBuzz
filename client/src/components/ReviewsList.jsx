@@ -72,18 +72,17 @@ function ReviewsList(props) {
   console.log('thisProductsReviews', thisProductsReviews);
   return (
     <div className={classes.root}>
-      <Grid container xs={12}>
+      <Grid container>
         <h4>RATINGS AND REVIEWS</h4>
       </Grid>
 
       {/* Left column grid */}
-      <Grid container spaceing={3}>
-        <Grid container xs={3}>
-          <Grid item>
-            <RatingsBreakdown />
-          </Grid>
-          {/* add a product breakdown component here */}
+      <Grid container spaceing={10}>
+        <Grid item xs={3}>
+          <RatingsBreakdown />
         </Grid>
+
+        {/* add a product breakdown component here */}
 
         {/* Right column grid */}
         <Grid item xs={9}>
@@ -92,11 +91,11 @@ function ReviewsList(props) {
             // eslint-disable-next-line max-len
             ? reviews.map((review) => (
               <Grid
-              // Create unique key for each review
+                // Create unique key for each review
                 key={review.review_id}
               >
                 <ReviewTile
-                // set
+                  // set
                   reviews={review}
                 />
                 {/* console.log(review.review_id) */}

@@ -23,6 +23,7 @@ function ReviewTile(props) {
   const thisProductsReviews = props.reviews;
   // how do i get rid of the line below
   const [productId, setProductId] = useState(2);
+  const [stars, setStars] = React.useState(2);
   // material ui classes
   const classes = useStyles();
 
@@ -40,7 +41,7 @@ function ReviewTile(props) {
         <Grid container spacing={3}>
           <Grid item xs={3}>
             {/* {thisProductsReviews[productId].rating} */}
-            <StarRating stars={props.stars} />
+            <StarRating stars={stars} />
           </Grid>
           <Grid item>
             {thisProductsReviews.date
@@ -57,19 +58,19 @@ function ReviewTile(props) {
               : <Grid>{console.log('thisProductsReviews[productId].summary', thisProductsReviews.summary)}</Grid>}
           </Grid>
           <Grid item xs={7}>
-            {thisProductsReviews[productId].recommend
+            {thisProductsReviews.recommend == 1
               ? <Grid>I recommend this product</Grid>
-              : <Grid>{console.log('product has not been recomended', thisProductsReviews[productId].recommend)}</Grid>}
+              : <Grid>{console.log('product has not been recomended', thisProductsReviews.recommend)}</Grid>}
           </Grid>
 
           <Grid item xs={7}>
-            {thisProductsReviews[productId].body}
+            {thisProductsReviews.body}
           </Grid>
 
           {/* Report helpfullness grid */}
           <Grid item xs={7}>
             Helpful? yes (
-            {thisProductsReviews[productId].helpfulness}
+            {thisProductsReviews.helpfulness}
             ) | report
           </Grid>
           {/* closing container, and item tags */}
