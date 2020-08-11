@@ -66,8 +66,10 @@ function ReviewsList(props) {
     // call immediatly
     fetchReviews();
   }, []);
+  // should be an array of review objects
+  // [{},{},{},{},{}]
   const thisProductsReviews = reviews;
-  console.log('thisProductsReviews', thisProductsReviews)
+  console.log('thisProductsReviews', thisProductsReviews);
   return (
     <div className={classes.root}>
       <Grid container xs={12}>
@@ -85,9 +87,22 @@ function ReviewsList(props) {
 
         {/* Right column grid */}
         <Grid item xs={9}>
+          {/* If reviews have rendered */}
           {reviews.length > 0
             // eslint-disable-next-line max-len
-            ? reviews.map((review, i) => (<Grid key={reviews[i].review_id}><ReviewTile reviews={reviews} />{console.log(reviews[i].review_id)}</Grid>))
+            ? reviews.map((review) => (
+              <Grid
+              // Create unique key for each review
+                key={review.review_id}
+              >
+                <ReviewTile
+                // set
+                  reviews={review}
+                />
+                {/* console.log(review.review_id) */}
+              </Grid>
+            ))
+            // else still loading
             : <Paper>Hang tight...</Paper>}
         </Grid>
 
