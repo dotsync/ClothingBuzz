@@ -34,8 +34,6 @@ function ReviewTile(props) {
   return (
     <div className={classes.root}>
       <Grid container>
-        {/* console.log('Props were passed to child componenet', thisProductsReviews) */}
-        {console.log(' For development, Refer to these props at thisProductsReviews[productId]', thisProductsReviews[productId])}
 
         {/* Review rating and date grid */}
         <Grid container spacing={3}>

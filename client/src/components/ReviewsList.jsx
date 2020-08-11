@@ -86,7 +86,9 @@ function ReviewsList(props) {
 
         {/* Right column grid */}
         <Grid item xs={9}>
-          {/* If reviews have rendered */}
+          {/* If reviews are ready */}
+          {/* DEVELOPER CONSOLE LOGS PRE-MAP*/}
+          {console.log(' For development, Refer to these props at thisProductsReviews', thisProductsReviews)}
           {reviews.length > 0
             // eslint-disable-next-line max-len
             ? reviews.map((review) => (
@@ -98,7 +100,12 @@ function ReviewsList(props) {
                   // set
                   reviews={review}
                 />
-                {/* console.log(review.review_id) */}
+                {/* DEVELOPER CONSOLE LOGS IN-MAP*/}
+                {console.log(
+                  '     review.review_id', review.review_id,
+                  '     review.summary', review.summary,
+                  '     review.rating', review.rating,
+                )}
               </Grid>
             ))
             // else still loading
