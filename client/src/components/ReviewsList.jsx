@@ -1,9 +1,15 @@
 /* eslint-disable no-console */
 /* eslint-disable react/prefer-stateless-function */
 import React, { useState, useEffect } from 'react';
+// import material ui
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Grid';
+
 import ReviewTile from './ReviewTile.jsx';
+import Footer from './Footer.jsx';
 // need this line of code in order to run async funcs
-const regeneratorRuntime = require("regenerator-runtime");
+const regeneratorRuntime = require('regenerator-runtime');
 
 function ReviewsList(props) {
   // greenfield api
@@ -47,19 +53,22 @@ function ReviewsList(props) {
   return (
     <div className="ratings-and-reviews">
       RATINGS AND REVIEWS
-      <div className="col-left">
-        {/* <StarRating /> */}
-      </div>
+      <Grid container>
+        <Grid item>
+          {/* <StarRating /> */}
+        </Grid>
+      </Grid>
       <div className="col-right">
-        <div className="review-tiles">
-          <ReviewTile
-            reviews={reviews}
-          />
-        </div>
-        <div className="footer">
-          more reviews button | add review + button | socialmeadi icons
-          {/* <Footer /> */}
-        </div>
+        <Grid container>
+          <Grid item>
+            <ReviewTile
+              reviews={reviews}
+            />
+          </Grid>
+        </Grid>
+      </div>
+      <div className="footer">
+        <Footer />
       </div>
     </div>
   );
