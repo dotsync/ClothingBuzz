@@ -12,6 +12,19 @@ import Footer from './Footer.jsx';
 // need this line of code in order to run async funcs
 const regeneratorRuntime = require('regenerator-runtime');
 
+// material ui styles
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
+
+// Main component
 function ReviewsList(props) {
   // greenfield api
   const api = 'http://52.26.193.201:3000';
@@ -19,6 +32,8 @@ function ReviewsList(props) {
   const [reviews, setReviews] = useState([]);
   // state is not loaded at first
   const [loaded, setLoaded] = useState(false);
+  // use material ui styles
+  const classes = useStyles();
 
   // fetch product id
   // useEffect(() => {
@@ -52,25 +67,35 @@ function ReviewsList(props) {
   }, []);
 
   return (
-    <div className="ratings-and-reviews">
-      RATINGS AND REVIEWS
-      <Grid container>
-        <Grid item>
-          {/* <StarRating stars={props.stars}/> */}
-        </Grid>
+    <div className={classes.root}>
+      <Grid container xs={12}>
+        <h4>RATINGS AND REVIEWS</h4>
       </Grid>
-      <div className="col-right">
-        <Grid container>
+
+      {/* Left column grid */}
+      <Grid container spaceing={3}>
+        <Grid container xs={6}>
+          <Grid item>
+            <StarRating stars={props.stars} />
+          </Grid>
+        </Grid>
+
+        {/* Right column grid */}
+        <Grid container xs={6}>
           <Grid item>
             <ReviewTile
               reviews={reviews}
             />
           </Grid>
         </Grid>
-      </div>
-      <div className="footer">
-        <Footer />
-      </div>
+
+        {/* Footer grid */}
+        <div className="footer">
+          <Footer />
+        </div>
+
+        {/* closing container, and item tags */}
+      </Grid>
     </div>
   );
 }
