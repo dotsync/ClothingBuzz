@@ -1,22 +1,22 @@
 /* eslint-disable no-console */
 /* eslint-disable react/prefer-stateless-function */
 import React, { useState } from 'react';
-
 // material ui
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+// Family components
+import StarRating from './StarRating.jsx';
 
 function ReviewTile(props) {
   const thisProductsReviews = props.reviews;
   // how do i get rid of the line below
   const [productId, setProductId] = useState(2);
   // msterial ui classes
-  const [spacing, setSpacing] = React.useState(2);
 
   // conditional render
   if (props.reviews.length === 0) {
-    return <div>Loading...</div>;
+    return <div>Loading reviews...</div>;
   }
   return (
     <Grid container>
@@ -24,15 +24,16 @@ function ReviewTile(props) {
       {console.log(' For development, Refer to these props at thisProductsReviews[productId]', thisProductsReviews[productId])}
       <Grid item>
 
-        {/* Review rating and date top bar */}
+        {/* Review rating and date grid */}
         <Grid container>
           <Grid item>
-            {thisProductsReviews[productId].rating}
+            {/* {thisProductsReviews[productId].rating} */}
+            <StarRating stars={props.stars}/>
             {thisProductsReviews[productId].date}
           </Grid>
         </Grid>
 
-        {/* Review contents */}
+        {/* Review contents grid */}
         <Grid container>
           <Grid item>
             {thisProductsReviews[productId].summary}

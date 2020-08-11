@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Grid';
 
 import ReviewTile from './ReviewTile.jsx';
+import StarRating from './StarRating.jsx';
 import Footer from './Footer.jsx';
 // need this line of code in order to run async funcs
 const regeneratorRuntime = require('regenerator-runtime');
@@ -55,7 +56,7 @@ function ReviewsList(props) {
       RATINGS AND REVIEWS
       <Grid container>
         <Grid item>
-          {/* <StarRating /> */}
+          {/* <StarRating stars={props.stars}/> */}
         </Grid>
       </Grid>
       <div className="col-right">
