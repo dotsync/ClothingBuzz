@@ -52,9 +52,9 @@ function ReviewTile(props) {
         {/* Review contents grid */}
         <Grid container spaceing={3}>
           <Grid item xs={7}>
-            {thisProductsReviews[productId].summary
-              ? <Grid>{thisProductsReviews[productId].summary}</Grid>
-              : <Grid>{console.log('thisProductsReviews[productId].summary', thisProductsReviews[productId].summary)}</Grid>}
+            {thisProductsReviews.summary
+              ? <Grid>{thisProductsReviews.summary}</Grid>
+              : <Grid>{console.log('thisProductsReviews[productId].summary', thisProductsReviews.summary)}</Grid>}
           </Grid>
           <Grid item xs={7}>
             {thisProductsReviews[productId].recommend
