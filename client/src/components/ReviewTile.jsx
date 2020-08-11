@@ -42,15 +42,19 @@ function ReviewTile(props) {
             {/* {thisProductsReviews[productId].rating} */}
             <StarRating stars={props.stars} />
           </Grid>
-          <Grid item xs={9}>
-            {thisProductsReviews[productId].date.slice(0, 9)}
+          <Grid item>
+            {thisProductsReviews.date
+              ? <Grid>{thisProductsReviews.date}</Grid>
+              : <Grid>{console.log('thisProductsReviews[productId].date', thisProductsReviews.date)}</Grid>}
           </Grid>
         </Grid>
 
         {/* Review contents grid */}
         <Grid container spaceing={3}>
           <Grid item xs={7}>
-            {thisProductsReviews[productId].summary}
+            {thisProductsReviews[productId].summary
+              ? <Grid>{thisProductsReviews[productId].summary}</Grid>
+              : <Grid>{console.log('thisProductsReviews[productId].summary', thisProductsReviews[productId].summary)}</Grid>}
           </Grid>
           <Grid item xs={7}>
             {thisProductsReviews[productId].recommend
