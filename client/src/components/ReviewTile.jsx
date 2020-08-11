@@ -23,6 +23,7 @@ function ReviewTile(props) {
   const thisProductsReviews = props.reviews;
   // how do i get rid of the line below
   const [productId, setProductId] = useState(2);
+  const [stars, setStars] = React.useState(2);
   // material ui classes
   const classes = useStyles();
 
@@ -33,14 +34,12 @@ function ReviewTile(props) {
   return (
     <div className={classes.root}>
       <Grid container>
-        {/* console.log('Props were passed to child componenet', thisProductsReviews) */}
-        {console.log(' For development, Refer to these props at thisProductsReviews[productId]', thisProductsReviews[productId])}
 
         {/* Review rating and date grid */}
         <Grid container spacing={3}>
           <Grid item xs={3}>
             {/* {thisProductsReviews[productId].rating} */}
-            <StarRating stars={props.stars} />
+            <StarRating stars={stars} />
           </Grid>
           <Grid item>
             {thisProductsReviews.date
@@ -52,24 +51,24 @@ function ReviewTile(props) {
         {/* Review contents grid */}
         <Grid container spaceing={3}>
           <Grid item xs={7}>
-            {thisProductsReviews[productId].summary
-              ? <Grid>{thisProductsReviews[productId].summary}</Grid>
-              : <Grid>{console.log('thisProductsReviews[productId].summary', thisProductsReviews[productId].summary)}</Grid>}
+            {thisProductsReviews.summary
+              ? <Grid>{thisProductsReviews.summary}</Grid>
+              : <Grid>{console.log('thisProductsReviews[productId].summary', thisProductsReviews.summary)}</Grid>}
           </Grid>
           <Grid item xs={7}>
-            {thisProductsReviews[productId].recommend
+            {thisProductsReviews.recommend == 1
               ? <Grid>I recommend this product</Grid>
-              : <Grid>{console.log('product has not been recomended', thisProductsReviews[productId].recommend)}</Grid>}
+              : <Grid>{console.log('product has not been recomended', thisProductsReviews.recommend)}</Grid>}
           </Grid>
 
           <Grid item xs={7}>
-            {thisProductsReviews[productId].body}
+            {thisProductsReviews.body}
           </Grid>
 
           {/* Report helpfullness grid */}
           <Grid item xs={7}>
             Helpful? yes (
-            {thisProductsReviews[productId].helpfulness}
+            {thisProductsReviews.helpfulness}
             ) | report
           </Grid>
           {/* closing container, and item tags */}
