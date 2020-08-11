@@ -5,8 +5,8 @@ import Paper from '@material-ui/core/Grid';
 
 function Footer(props) {
   return (
-    <div>more reviews] button | [add review +] button | socialmedia icons</div>
-  )
+    <div>footer</div>
+  );
 }
 
 export default Footer;

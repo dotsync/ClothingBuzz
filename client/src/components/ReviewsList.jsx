@@ -8,6 +8,7 @@ import Paper from '@material-ui/core/Grid';
 
 import ReviewTile from './ReviewTile.jsx';
 import StarRating from './StarRating.jsx';
+import RatingsBreakdown from './RatingsBreakdown.jsx';
 import Footer from './Footer.jsx';
 // need this line of code in order to run async funcs
 const regeneratorRuntime = require('regenerator-runtime');
@@ -65,7 +66,8 @@ function ReviewsList(props) {
     // call immediatly
     fetchReviews();
   }, []);
-
+  const thisProductsReviews = reviews;
+  console.log('thisProductsReviews', thisProductsReviews)
   return (
     <div className={classes.root}>
       <Grid container xs={12}>
@@ -74,25 +76,22 @@ function ReviewsList(props) {
 
       {/* Left column grid */}
       <Grid container spaceing={3}>
-        <Grid container xs={6}>
+        <Grid container xs={3}>
           <Grid item>
-            <StarRating stars={props.stars} />
+            <RatingsBreakdown />
           </Grid>
+          {/* add a product breakdown component here */}
         </Grid>
 
         {/* Right column grid */}
-        <Grid container xs={6}>
-          <Grid item>
-            <ReviewTile
-              reviews={reviews}
-            />
-          </Grid>
+        <Grid item xs={9}>
+          {reviews.length > 0
+            // eslint-disable-next-line max-len
+            ? reviews.map((review, i) => (<Grid key={reviews[i].review_id}><ReviewTile reviews={reviews} />{console.log(reviews[i].review_id)}</Grid>))
+            : <Paper>Hang tight...</Paper>}
         </Grid>
 
         {/* Footer grid */}
-        <div className="footer">
-          <Footer />
-        </div>
 
         {/* closing container, and item tags */}
       </Grid>
