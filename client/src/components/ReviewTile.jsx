@@ -29,7 +29,7 @@ function ReviewTile(props) {
           <Grid item>
             {/* {thisProductsReviews[productId].rating} */}
             <StarRating stars={props.stars}/>
-            {thisProductsReviews[productId].date}
+            {thisProductsReviews[productId].date.slice(0,9)}
           </Grid>
         </Grid>
 
