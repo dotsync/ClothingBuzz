@@ -17,7 +17,7 @@ function StarRating(props) {
             setStars(newValue);
           }}
         />
-        {console.log('from <StarRating/> reviews:', props.reviews)}
+        {/* {console.log('from <StarRating/> reviews:', props.reviews)} */}
       </Box>
     </div>
   );
