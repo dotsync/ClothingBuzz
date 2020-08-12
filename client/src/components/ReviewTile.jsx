@@ -38,17 +38,17 @@ function ReviewTile(props) {
   return (
     <div className={classes.root}>
       <Paper>
-      <Grid container>
+        <Grid container>
 
-        {/* Review rating and date grid */}
-        {/* {console.log('starssss', thisProductsReviews.ratings)} */}
-        {thisProductsReviews.rating < 1
-          ? console.log('rating is greater than 1')
-          : <Grid item xs={3}><StarRating /></Grid>}
-        {thisProductsReviews.date.slice(0, 10)}
-      </Grid>
+          {/* Review rating and date grid */}
+          {/* {console.log('starssss', thisProductsReviews.ratings)} */}
+          {thisProductsReviews.rating < 1
+            ? console.log('rating is greater than 1')
+            : <Grid item xs={3}><StarRating reviews={props.reviews}/></Grid>}
+          {thisProductsReviews.date.slice(0, 10)}
+        </Grid>
 
-      {/* Review contents grid */}
+        {/* Review contents grid */}
         <Typography variant="h6" gutterBottom>{thisProductsReviews.summary}</Typography>
         {thisProductsReviews.recommend
           ? (
