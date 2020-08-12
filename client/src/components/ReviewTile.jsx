@@ -5,6 +5,10 @@ import React, { useState } from 'react';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import CheckIcon from '@material-ui/icons/Check';
+import Box from '@material-ui/core/Box';
+
 // Family components
 import StarRating from './StarRating.jsx';
 
@@ -16,14 +20,14 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
+    elevation: 1,
   },
 }));
 
 function ReviewTile(props) {
   const thisProductsReviews = props.reviews;
   // how do i get rid of the line below
-  const [productId, setProductId] = useState(2);
-  const [stars, setStars] = React.useState(2);
+  const [productId, setProductId] = useState();
   // material ui classes
   const classes = useStyles();
 
@@ -33,47 +37,56 @@ function ReviewTile(props) {
   }
   return (
     <div className={classes.root}>
+      <Paper>
       <Grid container>
 
         {/* Review rating and date grid */}
-        <Grid container spacing={3}>
-          <Grid item xs={3}>
-            {/* {thisProductsReviews[productId].rating} */}
-            <StarRating stars={stars} />
-          </Grid>
-          <Grid item>
-            {thisProductsReviews.date
-              ? <Grid>{thisProductsReviews.date}</Grid>
-              : <Grid>{console.log('thisProductsReviews[productId].date', thisProductsReviews.date)}</Grid>}
-          </Grid>
-        </Grid>
-
-        {/* Review contents grid */}
-        <Grid container spaceing={3}>
-          <Grid item xs={7}>
-            {thisProductsReviews.summary
-              ? <Grid>{thisProductsReviews.summary}</Grid>
-              : <Grid>{console.log('thisProductsReviews[productId].summary', thisProductsReviews.summary)}</Grid>}
-          </Grid>
-          <Grid item xs={7}>
-            {thisProductsReviews.recommend == 1
-              ? <Grid>I recommend this product</Grid>
-              : <Grid>{console.log('product has not been recomended', thisProductsReviews.recommend)}</Grid>}
-          </Grid>
-
-          <Grid item xs={7}>
-            {thisProductsReviews.body}
-          </Grid>
-
-          {/* Report helpfullness grid */}
-          <Grid item xs={7}>
-            Helpful? yes (
-            {thisProductsReviews.helpfulness}
-            ) | report
-          </Grid>
-          {/* closing container, and item tags */}
-        </Grid>
+        {/* {console.log('starssss', thisProductsReviews.ratings)} */}
+        {thisProductsReviews.rating < 1
+          ? console.log('rating is greater than 1')
+          : <Grid item xs={3}><StarRating /></Grid>}
+        {thisProductsReviews.date.slice(0, 10)}
       </Grid>
+
+      {/* Review contents grid */}
+        <Typography variant="h6" gutterBottom>{thisProductsReviews.summary}</Typography>
+        {thisProductsReviews.recommend
+          ? (
+            <Grid>
+              <Typography variant="caption" display="block" gutterBottom>
+                <CheckIcon />
+                I recommend this product
+              </Typography>
+            </Grid>
+          )
+          : <Grid>{console.log('product has not been recomended', thisProductsReviews.recommend)}</Grid>}
+        {thisProductsReviews.body}
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        {/* Report helpfullness grid */}
+        <Grid item xs={7}>
+          Helpful?
+          {' '}
+          {/* TODO: When i click i yes do something */}
+          <u>yes</u>
+          {' '}
+          (
+          {thisProductsReviews.helpfulness}
+          ) |
+          {' '}
+          {/* TODO: When i click i report do something */}
+          <u>report</u>
+        </Grid>
+      </Paper>
+      {/* closing container, and item tags */}
+
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 }

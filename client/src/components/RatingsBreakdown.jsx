@@ -27,7 +27,7 @@ function RatingsBreakdown(props) {
           <Paper className={classes.paper}>BIG NUMBER</Paper>
         </Grid>
         <Grid item xs={4}>
-          <StarRating />
+          {/* <StarRating /> */}
         </Grid>
       </Grid>
       {/* Rows of five stars */}
