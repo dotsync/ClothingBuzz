@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Grid';
 
+import AddReview from './Addreview.jsx';
 import ReviewTile from './ReviewTile.jsx';
 import StarRating from './StarRating.jsx';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
@@ -90,7 +91,7 @@ function ReviewsList(props) {
         {/* Right column grid */}
         <Grid item xs={7}>
           {/* If reviews are ready */}
-          {/* DEVELOPER CONSOLE LOGS PRE-MAP*/}
+          {/* DEVELOPER CONSOLE LOGS PRE-MAP */}
           {console.log(' For development, Refer to these props at thisProductsReviews', thisProductsReviews)}
           {reviews.length > 0
             // eslint-disable-next-line max-len
@@ -103,7 +104,7 @@ function ReviewsList(props) {
                   // set
                   reviews={review}
                 />
-                {/* DEVELOPER CONSOLE LOGS IN-MAP*/}
+                {/* DEVELOPER CONSOLE LOGS IN-MAP */}
                 {console.log(
                   '     review.review_id', review.review_id,
                   '     review.helpfulness', review.helpfulness,
@@ -114,10 +115,16 @@ function ReviewsList(props) {
             // else still loading
             : <Paper>Hang tight...</Paper>}
         </Grid>
-
         {/* Footer grid */}
 
         {/* closing container, and item tags */}
+      </Grid>
+      <Grid container spaceing={10}>
+        <Grid item xs={7} />
+        <Grid item xs={5}>
+          <AddReview reviews={reviews} />
+          {/* <AddReview reviews={reviews} /> */}
+        </Grid>
       </Grid>
     </div>
 
