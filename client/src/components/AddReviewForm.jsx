@@ -27,6 +27,7 @@
 import React, { useState, UseEffect } from 'react';
 // Mui imports
 import { Grid, TextField, makeStyles } from '@material-ui/core';
+import useForm from './useForm.jsx';
 
 // custom styles
 const useStyles = makeStyles((theme) => ({
@@ -55,18 +56,13 @@ const initialFormValues = {
 function AddReviewForm(props) {
   console.log('from AddReviewForm component: props.reviews = ', props.reviews);
 
-  const [values, setValues] = useState(initialFormValues);
   const classes = useStyles();
 
-  // create inputchange handler
-  const handleInputChange = e => {
-    const { name, value } = e.target;
-    // change values object
-    setValues({
-      ...values,
-      [name]:value
-    });
-  };
+  const {
+    values,
+    setValues,
+    handleInputChange,
+  } = useForm(initialFormValues);
 
   return (
     <form className={classes.root}>
