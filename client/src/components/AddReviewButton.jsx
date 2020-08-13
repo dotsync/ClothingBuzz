@@ -72,7 +72,6 @@ function AddReview(props) {
   //   }
   //   console.log('posted a review');
   // }, []);
-  console.log('from <AddReview /> reviews:', props.reviews);
 
   const handleOpen = () => {
     setOpen(true);
@@ -84,7 +83,7 @@ function AddReview(props) {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2 id="simple-modal-title">Text in a modal</h2>
-      <AddReviewForm />
+      <AddReviewForm reviews={props.reviews} />
     </div>
   );
   return (

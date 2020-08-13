@@ -28,8 +28,7 @@ import React from 'react';
 function AddReviewForm(props) {
   return (
     <div>
-      <h1>Hello from addReviewForm i was triggered by modal click</h1>
-      <h2>Organize me into the form you want to see</h2>
+      {console.log(props.reviews)}
     </div>
   );
 }
