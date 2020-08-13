@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function useForm(initialFormValues) {
+function useForm(initialFormValues) {
   const [values, setValues] = useState(initialFormValues);
 
   // create input change handler
@@ -18,3 +18,16 @@ export default function useForm(initialFormValues) {
     handleInputChange,
   };
 }
+
+function Form(props) {
+  return (
+    <form>
+      {props.children}
+    </form>
+  );
+}
+
+export {
+  useForm,
+  Form,
+};

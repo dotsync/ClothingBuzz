@@ -27,7 +27,7 @@
 import React, { useState, UseEffect } from 'react';
 // Mui imports
 import { Grid, TextField, makeStyles } from '@material-ui/core';
-import useForm from './useForm.jsx';
+import { useForm, Form } from './useForm.jsx';
 
 // custom styles
 const useStyles = makeStyles((theme) => ({
@@ -65,7 +65,7 @@ function AddReviewForm(props) {
   } = useForm(initialFormValues);
 
   return (
-    <form className={classes.root}>
+    <Form>
       <Grid container>
         <Grid item xs={6}>
           <TextField
@@ -84,7 +84,7 @@ function AddReviewForm(props) {
           />
         </Grid>
       </Grid>
-    </form>
+    </Form>
   );
 }
 export default AddReviewForm;
