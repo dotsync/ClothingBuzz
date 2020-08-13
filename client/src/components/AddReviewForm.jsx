@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable max-len */
 /** Justification: Creates a form with these **required** specification fields below.
  * **Specifications**
@@ -23,13 +24,29 @@
  * ***********************************************************************************************************************************
  */
 
-import React from 'react';
+import React, { useState, UseEffect } from 'react';
+
+const initialFormValues = {
+  id: 0,
+  myReviewNickName: '',
+  myReviewEmail: '',
+  myReviewRecommendation: '',
+  myReviewStarRating: '',
+  myReviewPhotos: '',
+  myReviewSize: '',
+  myReviewWidth: '',
+  myReviewComfort: '',
+  myReviewLength: '',
+  myReviewFit: '',
+};
 
 function AddReviewForm(props) {
+  console.log('resetting state from AddReviewForm component: props.reviews = ', props.reviews);
+
+  const [values, setValues] = useState();
+
   return (
-    <div>
-      {console.log(props.reviews)}
-    </div>
+    <div />
   );
 }
 export default AddReviewForm;
