@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 // import material ui
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
 import AddReviewButton from './AddReviewButton.jsx';
 import ReviewTile from './ReviewTile.jsx';
@@ -97,7 +97,7 @@ function ReviewsList(props) {
           {reviews.length > 0
             // eslint-disable-next-line max-len
             ? reviews.map((review) => (
-              <Paper
+              <Grid
                 // Create unique key for each review
                 key={review.review_id}
               >
@@ -111,7 +111,7 @@ function ReviewsList(props) {
                   '     review.helpfulness', review.helpfulness,
                   '     review.rating', review.rating,
                 )} */}
-              </Paper>
+              </Grid>
             ))
             // else still loading
             : <Paper>Hang tight...</Paper>}

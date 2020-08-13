@@ -25,6 +25,8 @@
  */
 
 import React, { useState, UseEffect } from 'react';
+// Mui imports
+import { Grid, TextField, makeStyles } from '@material-ui/core';
 
 const initialFormValues = {
   id: 0,
@@ -41,12 +43,25 @@ const initialFormValues = {
 };
 
 function AddReviewForm(props) {
-  console.log('resetting state from AddReviewForm component: props.reviews = ', props.reviews);
+  console.log('from AddReviewForm component: props.reviews = ', props.reviews);
 
   const [values, setValues] = useState(initialFormValues);
 
   return (
-    <div />
+    <Grid container>
+      <Grid item xs={6}>
+        <TextField
+          variant="outlined"
+          label="Nickname"
+          value={values.myReviewNickName}
+        />
+        <TextField
+          variant="outlined"
+          label="Nickname"
+          value={values.myReviewEmail}
+        />
+      </Grid>
+    </Grid>
   );
 }
 export default AddReviewForm;
