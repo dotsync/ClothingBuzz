@@ -43,7 +43,7 @@ const initialFormValues = {
 function AddReviewForm(props) {
   console.log('resetting state from AddReviewForm component: props.reviews = ', props.reviews);
 
-  const [values, setValues] = useState();
+  const [values, setValues] = useState(initialFormValues);
 
   return (
     <div />
