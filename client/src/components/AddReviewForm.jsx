@@ -29,16 +29,6 @@ import React, { useState, UseEffect } from 'react';
 import { Grid, TextField, makeStyles } from '@material-ui/core';
 import { useForm, Form } from './useForm.jsx';
 
-// custom styles
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& .MuiFormControl-root': {
-      width: '80%',
-      margin: theme.spacing(1),
-    },
-  },
-}));
-
 const initialFormValues = {
   id: 0,
   myReviewNickName: '',
@@ -55,8 +45,6 @@ const initialFormValues = {
 
 function AddReviewForm(props) {
   console.log('from AddReviewForm component: props.reviews = ', props.reviews);
-
-  const classes = useStyles();
 
   const {
     values,
