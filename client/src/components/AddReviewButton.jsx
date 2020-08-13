@@ -31,25 +31,28 @@ function AddReview(props) {
   // use material ui styles
   const classes = useStyles();
 
-  useEffect(() => {
-    // INCOMPLETE
-    async function addMyReview() {
-      try {
-        const response = await fetch(`${api}/reviews/${productId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-          },
-          body: JSON.stringify(userReview),
-        });
-        const result = await response.json();
-        // set state if necessary
-      } catch (err) {
-        console.log('Error adding review <AddReview />:', err);
-      }
-    }
-    console.log('posted a review');
-  }, []);
+  // initial form values for creating a new review
+
+  // useEffect(() => {
+  //   const [values, setValues] = useState();
+  //   // INCOMPLETE
+  //   async function addMyReview() {
+  //     try {
+  //       const response = await fetch(`${api}/reviews/${productId}`, {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json;charset=utf-8',
+  //         },
+  //         body: JSON.stringify(userReview),
+  //       });
+  //       const result = await response.json();
+  //       // set state if necessary
+  //     } catch (err) {
+  //       console.log('Error adding review <AddReview />:', err);
+  //     }
+  //   }
+  //   console.log('posted a review');
+  // }, []);
   console.log('from <AddReview /> reviews:', props.reviews);
 
   return (

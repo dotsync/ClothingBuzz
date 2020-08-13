@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable react/prefer-stateless-function */
 import React, { useState, useEffect } from 'react';
@@ -6,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Grid';
 
-import AddReview from './Addreview.jsx';
+import AddReviewButton from './AddreviewButton.jsx';
 import ReviewTile from './ReviewTile.jsx';
 import StarRating from './StarRating.jsx';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
@@ -72,7 +73,7 @@ function ReviewsList(props) {
   // should be an array of review objects
   // [{},{},{},{},{}]
   const thisProductsReviews = reviews;
-  console.log('thisProductsReviews', thisProductsReviews);
+  // console.log('thisProductsReviews', thisProductsReviews);
   return (
     <div className={classes.root}>
       <Grid container>
@@ -92,7 +93,7 @@ function ReviewsList(props) {
         <Grid item xs={7}>
           {/* If reviews are ready */}
           {/* DEVELOPER CONSOLE LOGS PRE-MAP */}
-          {console.log(' For development, Refer to these props at thisProductsReviews', thisProductsReviews)}
+          {/* {console.log(' For development, Refer to these props at thisProductsReviews', thisProductsReviews)} */}
           {reviews.length > 0
             // eslint-disable-next-line max-len
             ? reviews.map((review) => (
@@ -105,11 +106,11 @@ function ReviewsList(props) {
                   reviews={review}
                 />
                 {/* DEVELOPER CONSOLE LOGS IN-MAP */}
-                {console.log(
+                {/* {console.log(
                   '     review.review_id', review.review_id,
                   '     review.helpfulness', review.helpfulness,
                   '     review.rating', review.rating,
-                )}
+                )} */}
               </Paper>
             ))
             // else still loading
@@ -122,7 +123,7 @@ function ReviewsList(props) {
       <Grid container spaceing={10}>
         <Grid item xs={7} />
         <Grid item xs={5}>
-          <AddReview reviews={reviews} />
+          <AddReviewButton reviews={reviews} />
           {/* <AddReview reviews={reviews} /> */}
         </Grid>
       </Grid>
