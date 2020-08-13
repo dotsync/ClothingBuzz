@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from 'react';
 // import material ui
 import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
+import {
+  Modal, Button, Grid, Paper,
+} from '@material-ui/core/';
 // import componenets
 import ReviewTile from './ReviewTile.jsx';
 import ReviewsList from './ReviewsList.jsx';
@@ -81,8 +81,11 @@ function AddReview(props) {
   };
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Text in a modal</h2>
-      <AddReviewForm reviews={props.reviews} />
+      <h2 id="simple-modal-title">Add your review!</h2>
+      <p>Please filled out all required * fields</p>
+      <Paper>
+        <AddReviewForm reviews={props.reviews} />
+      </Paper>
     </div>
   );
   return (

@@ -28,6 +28,16 @@ import React, { useState, UseEffect } from 'react';
 // Mui imports
 import { Grid, TextField, makeStyles } from '@material-ui/core';
 
+// custom styles
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& .MuiFormControl-root': {
+      width: '80%',
+      margin: theme.spacing(1),
+    },
+  },
+}));
+
 const initialFormValues = {
   id: 0,
   myReviewNickName: '',
@@ -46,22 +56,25 @@ function AddReviewForm(props) {
   console.log('from AddReviewForm component: props.reviews = ', props.reviews);
 
   const [values, setValues] = useState(initialFormValues);
+  const classes = useStyles();
 
   return (
-    <Grid container>
-      <Grid item xs={6}>
-        <TextField
-          variant="outlined"
-          label="Nickname"
-          value={values.myReviewNickName}
-        />
-        <TextField
-          variant="outlined"
-          label="Nickname"
-          value={values.myReviewEmail}
-        />
+    <form className={classes.root}>
+      <Grid container>
+        <Grid item xs={6}>
+          <TextField
+            variant="outlined"
+            label="Nickname"
+            value={values.myReviewNickName}
+          />
+          <TextField
+            variant="outlined"
+            label="Email"
+            value={values.myReviewEmail}
+          />
+        </Grid>
       </Grid>
-    </Grid>
+    </form>
   );
 }
 export default AddReviewForm;
