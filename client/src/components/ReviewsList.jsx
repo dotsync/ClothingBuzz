@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Grid';
 
-import AddReviewButton from './AddreviewButton.jsx';
+import AddReviewButton from './AddReviewButton.jsx';
 import ReviewTile from './ReviewTile.jsx';
 import StarRating from './StarRating.jsx';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
