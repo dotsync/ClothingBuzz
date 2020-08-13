@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import CheckIcon from '@material-ui/icons/Check';
 import Box from '@material-ui/core/Box';
+import Divider from '@material-ui/core/Divider';
 
 // Family components
 import StarRating from './StarRating.jsx';
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    elevation: 1,
+    elevation: 0,
   },
 }));
 
@@ -59,7 +60,7 @@ function ReviewTile(props) {
               </Typography>
             </Grid>
           )
-          : <Grid>{console.log('product has not been recomended', thisProductsReviews.recommend)}</Grid>}
+          : <Grid><br /></Grid>}
         {thisProductsReviews.body}
         <br />
         <br />
@@ -79,6 +80,7 @@ function ReviewTile(props) {
           {' '}
           {/* TODO: When i click i report do something */}
           <u>report</u>
+          <Divider variant="middle" />
         </Grid>
       </Paper>
       {/* closing container, and item tags */}
