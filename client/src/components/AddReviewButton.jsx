@@ -31,7 +31,7 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: 400,
+    width: 800,
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
@@ -82,7 +82,7 @@ function AddReview(props) {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2 id="simple-modal-title">Add your review!</h2>
-      <p>Please filled out all required * fields</p>
+      <p>Please fill out all required * fields</p>
       <Paper>
         <AddReviewForm reviews={props.reviews} />
       </Paper>

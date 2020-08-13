@@ -58,6 +58,16 @@ function AddReviewForm(props) {
   const [values, setValues] = useState(initialFormValues);
   const classes = useStyles();
 
+  // create inputchange handler
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+    // change values object
+    setValues({
+      ...values,
+      [name]:value
+    });
+  };
+
   return (
     <form className={classes.root}>
       <Grid container>
@@ -65,12 +75,16 @@ function AddReviewForm(props) {
           <TextField
             variant="outlined"
             label="Nickname"
+            name="myReviewNickName"
             value={values.myReviewNickName}
+            onChange={handleInputChange}
           />
           <TextField
             variant="outlined"
             label="Email"
+            name="myReviewEmail"
             value={values.myReviewEmail}
+            onChange={handleInputChange}
           />
         </Grid>
       </Grid>
