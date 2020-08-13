@@ -26,17 +26,17 @@
 
 import React, { useState, UseEffect } from 'react';
 // Mui imports
-import { Grid, TextField, makeStyles } from '@material-ui/core';
 import {
-  FormControl, FormControlLabel, FormLabel, Radio, RadioGroup,
+  FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Grid, TextField,
 } from '@material-ui/core';
 import { useForm, Form } from './useForm.jsx';
+import Input from './controls/Input.jsx';
 
 const initialFormValues = {
   id: 0,
   myReviewNickName: '',
   myReviewEmail: '',
-  myReviewRecommendation: '',
+  myReviewRecommendation: 'yes',
   myReviewStarRating: '',
   myReviewPhotos: '',
   myReviewSize: '',
@@ -47,7 +47,7 @@ const initialFormValues = {
 };
 
 function AddReviewForm(props) {
-  console.log('from AddReviewForm component: props.reviews = ', props.reviews);
+  // console.log('from AddReviewForm component: props.reviews = ', props.reviews);
 
   const {
     values,
@@ -60,15 +60,13 @@ function AddReviewForm(props) {
       <Grid container>
         {/* Left side of form */}
         <Grid item xs={6}>
-          <TextField
-            variant="outlined"
+          <Input
             label="Nickname"
             name="myReviewNickName"
             value={values.myReviewNickName}
             onChange={handleInputChange}
           />
-          <TextField
-            variant="outlined"
+          <Input
             label="Email"
             name="myReviewEmail"
             value={values.myReviewEmail}
@@ -80,7 +78,12 @@ function AddReviewForm(props) {
         <Grid item xs={6}>
           <FormControl>
             <FormLabel>Do you recommend this product?</FormLabel>
-            <RadioGroup row>
+            <RadioGroup
+              row
+              name="myReviewRecommendation"
+              value={values.myReviewRecommendation}
+              onChange={handleInputChange}
+            >
               <FormControlLabel value="yes" control={<Radio />} label="yes" />
               <FormControlLabel value="no" control={<Radio />} label="no" />
             </RadioGroup>
