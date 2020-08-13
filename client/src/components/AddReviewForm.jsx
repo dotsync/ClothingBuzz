@@ -27,6 +27,9 @@
 import React, { useState, UseEffect } from 'react';
 // Mui imports
 import { Grid, TextField, makeStyles } from '@material-ui/core';
+import {
+  FormControl, FormControlLabel, FormLabel, Radio, RadioGroup,
+} from '@material-ui/core';
 import { useForm, Form } from './useForm.jsx';
 
 const initialFormValues = {
@@ -55,6 +58,7 @@ function AddReviewForm(props) {
   return (
     <Form>
       <Grid container>
+        {/* Left side of form */}
         <Grid item xs={6}>
           <TextField
             variant="outlined"
@@ -70,6 +74,24 @@ function AddReviewForm(props) {
             value={values.myReviewEmail}
             onChange={handleInputChange}
           />
+        </Grid>
+
+        {/* Right side of form */}
+        <Grid item xs={6}>
+          <FormControl>
+            <FormLabel>Do you recommend this product?</FormLabel>
+            <RadioGroup row>
+              <FormControlLabel value="yes" control={<Radio />} label="yes" />
+              <FormControlLabel value="no" control={<Radio />} label="no" />
+            </RadioGroup>
+          </FormControl>
+        </Grid>
+
+      </Grid>
+      {/* Bottom of form, where the characteristics radio buttons will be */}
+      <Grid container>
+        <Grid item xs={12}>
+          <h3>this is where the Characterisitics go</h3>
         </Grid>
       </Grid>
     </Form>
