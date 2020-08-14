@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  FormControl, FormControlLabel, Grid, FormLabel, Radio, RadioGroup as MuiRadioGroup,
+  FormControl, FormControlLabel, FormLabel, Radio, RadioGroup as MuiRadioGroup,
 } from '@material-ui/core';
 
 export default function RadioGroup(props) {
@@ -20,6 +20,7 @@ export default function RadioGroup(props) {
           items.map(
             (item, i) => (
               <FormControlLabel
+                required
                 key={i}
                 value={item.id}
                 control={<Radio />}
