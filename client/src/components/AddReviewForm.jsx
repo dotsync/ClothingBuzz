@@ -27,10 +27,22 @@
 import React, { useState, UseEffect } from 'react';
 // Mui imports
 import {
-  FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Grid, TextField,
+  FormControl, FormControlLabel, Grid, FormLabel, Radio, RadioGroup as MuiRadioGroup,
 } from '@material-ui/core';
 import { useForm, Form } from './useForm.jsx';
-import Input from './controls/Input.jsx';
+import Controls from './controls/Controls.jsx';
+
+const myRecommendationItems = [
+  { id: 'yes', title: 'Yes' },
+  { id: 'sdgdsgsdg', title: 'No' },
+];
+const myReviewStarRatingItems = [
+  { id: 1, title: '1' },
+  { id: 2, title: '2' },
+  { id: 3, title: '3' },
+  { id: 4, title: '4' },
+  { id: 5, title: '5' },
+];
 
 const initialFormValues = {
   id: 0,
@@ -38,6 +50,8 @@ const initialFormValues = {
   myReviewEmail: '',
   myReviewRecommendation: 'yes',
   myReviewStarRating: '',
+  myReviewSummary: '',
+  myReviewBody: '',
   myReviewPhotos: '',
   myReviewSize: '',
   myReviewWidth: '',
@@ -60,34 +74,51 @@ function AddReviewForm(props) {
       <Grid container>
         {/* Left side of form */}
         <Grid item xs={6}>
-          <Input
+          <Controls.Input
             label="Nickname"
             name="myReviewNickName"
             value={values.myReviewNickName}
             onChange={handleInputChange}
           />
-          <Input
+          <Controls.Input
             label="Email"
             name="myReviewEmail"
             value={values.myReviewEmail}
             onChange={handleInputChange}
           />
+          <Controls.RadioGroup
+            label="Do you recommend this product?"
+            name="myReviewRecommendation"
+            value={values.myReviewRecommendation}
+            onChange={handleInputChange}
+            items={myRecommendationItems}
+          />
         </Grid>
 
         {/* Right side of form */}
         <Grid item xs={6}>
-          <FormControl>
-            <FormLabel>Do you recommend this product?</FormLabel>
-            <RadioGroup
-              row
-              name="myReviewRecommendation"
-              value={values.myReviewRecommendation}
-              onChange={handleInputChange}
-            >
-              <FormControlLabel value="yes" control={<Radio />} label="yes" />
-              <FormControlLabel value="no" control={<Radio />} label="no" />
-            </RadioGroup>
-          </FormControl>
+          {/* overall rating */}
+          <Controls.RadioGroup
+            label="How do rate this product?"
+            name="myReviewRecommendation"
+            value={values.myReviewStarRating}
+            onChange={handleInputChange}
+            items={myReviewStarRatingItems}
+          />
+          {/* summary */}
+          <Controls.Input
+            label="Summary"
+            name="myReviewSummary"
+            value={values.myReviewSummary}
+            onChange={handleInputChange}
+          />
+          {/* body */}
+          <Controls.Input
+            label="Body"
+            name="myReviewBody"
+            value={values.myReviewBody}
+            onChange={handleInputChange}
+          />
         </Grid>
 
       </Grid>
