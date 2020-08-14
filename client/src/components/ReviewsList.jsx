@@ -84,7 +84,7 @@ function ReviewsList(props) {
       <Grid container spaceing={2}>
         <Grid item xs={1} />
         <Grid item xs={3}>
-          <RatingsBreakdown />
+          <RatingsBreakdown reviews={reviews} />
         </Grid>
 
         {/* add a product breakdown component here */}
