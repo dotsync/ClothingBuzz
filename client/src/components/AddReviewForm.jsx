@@ -27,15 +27,20 @@
 import React, { useState, UseEffect } from 'react';
 // Mui imports
 import { Grid } from '@material-ui/core';
+
 import { useForm, Form } from './useForm.jsx';
 import Controls from './controls/Controls.jsx';
+import Rating from '@material-ui/lab/Rating';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import { decomposeColor } from '@material-ui/core';
 
 const myRecommendationItems = [
   { id: 'yes', title: 'Yes' },
   { id: 'no', title: 'No' },
 ];
 const myReviewStarRatingItems = [
-  { id: '1', title: '1' },
+  { id: 1, title: '1' },
   { id: '2', title: '2' },
   { id: '3', title: '3' },
   { id: '4', title: '4' },
@@ -73,27 +78,27 @@ const myReviewQualityItems = [
 const myReviewLengthItems = [
   { id: 'runs short', title: 'runs short' },
   { id: 'runs slightly short', title: 'runs slightly short' },
-  { id: 3, title: 'Perfect' },
-  { id: 4, title: 'runs slightly long' },
-  { id: 5, title: 'runs long' },
+  { id: 'perfect', title: 'Perfect' },
+  { id: 'runs slightly long', title: 'runs slightly long' },
+  { id: 'runs long', title: 'runs long' },
 ];
 const myReviewFitItems = [
-  { id: 1, title: 'runs tight' },
-  { id: 2, title: 'runs slightly tight' },
-  { id: 3, title: 'Perfect' },
-  { id: 4, title: 'runs slightly long' },
-  { id: 5, title: 'runs long' },
+  { id: 'runs tight', title: 'runs tight' },
+  { id: 'runs slightly tight', title: 'runs slightly tight' },
+  { id: 'perfect', title: 'Perfect' },
+  { id: 'runs slightly long', title: 'runs slightly long' },
+  { id: 'runs long', title: 'runs long' },
 ];
 
 const initialFormValues = {
-  id: 0,
-  myReviewNickName: '',
-  myReviewEmail: '',
-  myReviewRecommendation: '',
-  myReviewStarRating: '',
-  myReviewSummary: '',
-  myReviewBody: '',
-  myReviewPhotos: '',
+  review_id: 0,
+  reviewer_name: '',
+  email: '',
+  recommend: null,
+  rating: null,
+  summary: '',
+  body: '',
+  photos: [],
   myReviewSize: '',
   myReviewWidth: '',
   myReviewComfort: '',
@@ -104,7 +109,9 @@ const initialFormValues = {
 
 function AddReviewForm(props) {
   // console.log('from AddReviewForm component: props.reviews = ', props.reviews);
+  // console.log('from AddReviewForm component: initialFormValues = ', initialFormValues);
 
+  const [stars, setStars] = React.useState();
   const {
     values,
     setValues,
@@ -112,28 +119,26 @@ function AddReviewForm(props) {
   } = useForm(initialFormValues);
 
   return (
-    <Form>
+    <Form disableScrollLock={false}>
       <Grid container>
         {/* Left side of form */}
         <Grid item xs={6}>
           <Controls.Input
-            required
             label="Nickname"
-            name="myReviewNickName"
-            value={values.myReviewNickName}
+            name="reviewer_name"
+            value={values.reviewer_name}
             onChange={handleInputChange}
           />
           <Controls.Input
-
             label="Email"
-            name="myReviewEmail"
-            value={values.myReviewEmail}
+            name="email"
+            value={values.email}
             onChange={handleInputChange}
           />
           <Controls.RadioGroup
             label="Do you recommend this product?"
-            name="myReviewRecommendation"
-            value={values.myReviewRecommendation}
+            name="recommend"
+            value={values.recommend}
             onChange={handleInputChange}
             items={myRecommendationItems}
           />
@@ -142,26 +147,34 @@ function AddReviewForm(props) {
         {/* Right side of form */}
         <Grid item xs={6}>
           {/* overall rating */}
-          <Controls.RadioGroup
-            label="How do rate this product?"
-            name="myReviewRecommendation"
-            value={values.myReviewStarRating}
-            onChange={handleInputChange}
-            items={myReviewStarRatingItems}
-          />
+          <div className="my-star-rating">
+            <Box component="fieldset" mb={2} borderColor="transparent">
+              <Rating
+                name="my-star-rating"
+                // Initial value to each star component when its made
+                value={values.rating}
+                onChange={(event, newValue) => {
+                  setStars(newValue);
+                  values.rating = newValue;
+                  console.log(values.rating);
+                }}
+              />
+              {/* {console.log('from <StarRating/> reviews:', props.reviews)} */}
+            </Box>
+          </div>
           {/* summary */}
           <Controls.Input
             label="Summary"
-            name="myReviewSummary"
-            value={values.myReviewSummary}
+            name="summary"
+            value={values.summary}
             onChange={handleInputChange}
           />
           {/* body */}
           <Controls.Input
             multiline
             label="Body"
-            name="myReviewBody"
-            value={values.myReviewBody}
+            name="body"
+            value={values.body}
             onChange={handleInputChange}
           />
         </Grid>
@@ -187,7 +200,6 @@ function AddReviewForm(props) {
             items={myReviewWidthItems}
           />
           {/* Characteristics --- comfort */}
-          {console.log('comfort')}
           <Controls.RadioGroup
             label="Comfort"
             name="myReviewComfort"

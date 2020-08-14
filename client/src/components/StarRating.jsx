@@ -7,6 +7,7 @@ import { decomposeColor } from '@material-ui/core';
 function StarRating(props) {
   const [stars, setStars] = React.useState(2);
   const rating = props.reviews.rating;
+  console.log(typeof rating)
   return (
     <div className="star-rating">
       <Box component="fieldset" mb={2} borderColor="transparent">
