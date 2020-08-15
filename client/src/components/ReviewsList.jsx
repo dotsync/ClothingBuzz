@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
 import AddReviewButton from './AddReviewButton.jsx';
+import MoreReviewsButton from './MoreReviewsButton.jsx';
 import ReviewTile from './ReviewTile.jsx';
 import StarRating from './StarRating.jsx';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
@@ -39,6 +40,14 @@ function ReviewsList(props) {
   // use material ui styles
   const classes = useStyles();
 
+  const [reviewsLimit, setReviewsLimit] = useState(2);
+
+  const handleAdditionalReviews = () => {
+    //let limitedArray = reviews.slice(0, 3);
+    console.log('hello from handleClick', reviewsLimit);
+    setReviewsLimit(reviewsLimit + 1);
+    //limitedArray = reviews.slice(0, limit);
+  };
   // fetch product id
   // useEffect(() => {
   //   async function fetchProductId() {
@@ -74,6 +83,9 @@ function ReviewsList(props) {
   // [{},{},{},{},{}]
   const thisProductsReviews = reviews;
   // console.log('thisProductsReviews', thisProductsReviews);
+
+  const limitedArray = reviews.slice(0, reviewsLimit);
+  // console.log('limitedArray', limitedArray);
   return (
     <div className={classes.root}>
       <Grid container>
@@ -94,28 +106,25 @@ function ReviewsList(props) {
           {/* If reviews are ready */}
           {/* DEVELOPER CONSOLE LOGS PRE-MAP */}
           {/* {console.log(' For development, Refer to these props at thisProductsReviews', thisProductsReviews)} */}
+
           {reviews.length > 0
             // eslint-disable-next-line max-len
-            ? reviews.map((review) => (
-              <Grid
-                // Create unique key for each review
-                key={review.review_id}
-              >
-                <ReviewTile
-                  // set
-                  reviews={review}
-                />
-                {/* DEVELOPER CONSOLE LOGS IN-MAP */}
-                {/* {console.log(
-                  '     review.review_id', review.review_id,
-                  '     review.helpfulness', review.helpfulness,
-                  '     review.rating', review.rating,
-                )} */}
+            ? limitedArray.map((review) => (
+              <Grid key={review.review_id}>
+                <ReviewTile reviews={review} />
               </Grid>
             ))
             // else still loading
-            : <Paper>Hang tight...</Paper>}
+            : 'Waiting for reviews'}
         </Grid>
+
+
+
+        {/* const [reviewsLimit, setReviewsLimit] = useState(); */}
+
+
+
+
         {/* Footer grid */}
 
         {/* closing container, and item tags */}
@@ -123,6 +132,11 @@ function ReviewsList(props) {
       <Grid container spaceing={10}>
         <Grid item xs={7} />
         <Grid item xs={5}>
+          {/* <MoreReviewsButton limitedArray={limitedArray} limit={limit} /> */}
+          <MoreReviewsButton
+            reviews={reviews}
+            onClick={handleAdditionalReviews}
+          />
           <AddReviewButton reviews={reviews} />
           {/* <AddReview reviews={reviews} /> */}
         </Grid>

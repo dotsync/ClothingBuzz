@@ -2,13 +2,13 @@ import React from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 export default function RatingsLinearProgress(props) {
-  let totalStars = 0;
+  let totalPossibleStars = 0;
   let averageRating = 0;
   const { reviews } = props;
   console.log('RatingsBreakdowns', props.reviews);
   // get average
-  reviews.map((item) => totalStars += item.rating);
-  averageRating = totalStars / reviews.length;
+  reviews.map((item) => totalPossibleStars += 5);
+  averageRating = totalPossibleStars / reviews.length;
 
   // star values
   const starItems = {
@@ -27,24 +27,33 @@ export default function RatingsLinearProgress(props) {
 
   // totals stars = 100%
   // 100% divided by total stars give me my multiplyer.. floor it.
-  const multiplier = Math.ceil(100 / totalStars);
+  const totalPossibleStarsmultiplier = Math.ceil(100 / totalPossibleStars);
   // current item times multiplier gives racalibrated amount
   // console.log('multiplier', Math.floor(multiplier));
 
-  console.log('amount of stars', starItems);
+  console.log('amount of stars', totalPossibleStars);
 
   return (
     <div>
       <u>5 stars</u>
-      <LinearProgress variant="determinate" value={starItems.five * multiplier} />
+      <LinearProgress variant="determinate" value={starItems.five * totalPossibleStars} />
       <u>4 stars</u>
-      <LinearProgress variant="determinate" value={starItems.four * multiplier} />
+      <LinearProgress variant="determinate" value={starItems.four * totalPossibleStars} />
       <u>3 stars</u>
-      <LinearProgress variant="determinate" value={starItems.three * multiplier} />
+      <LinearProgress variant="determinate" value={starItems.three * totalPossibleStars} />
       <u>2 stars</u>
-      <LinearProgress variant="determinate" value={starItems.two * multiplier} />
+      <LinearProgress variant="determinate" value={starItems.two * totalPossibleStars} />
       <u>1 stars</u>
-      <LinearProgress variant="determinate" value={starItems.one * multiplier} />
+      <LinearProgress variant="determinate" value={starItems.one * totalPossibleStars} />
+    {console.log('added ratings up',
+
+        (starItems.one * totalPossibleStars) +
+        (starItems.two * totalPossibleStars) +
+        (starItems.three * totalPossibleStars) +
+        (starItems.four * totalPossibleStars) +
+        (starItems.five * totalPossibleStars)
+
+    )}
     </div>
   )
 }
