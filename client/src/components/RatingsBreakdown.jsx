@@ -12,6 +12,9 @@ import Rating from '@material-ui/lab/Rating';
 import { decomposeColor } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import RatingsLinearProgress from './RatingsLinearProgress.jsx';
+import RatingsStarRating from './RatingsStarRating.jsx';
+import RatingsSize from './RatingsSize.jsx'
 
 import StarRating from './StarRating.jsx';
 
@@ -27,38 +30,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function RatingsBreakdown(props) {
-  const [stars, setStars] = React.useState();
-  const classes = useStyles();
-  let totalStars = 0;
-  let averageRating = 0;
-  const { reviews } = props;
-  console.log('RatingsBreakdowns', props.reviews);
-  // get average
-  props.reviews.map((item) => totalStars += item.rating);
-  averageRating = totalStars / reviews.length;
-
-  console.log('averageRating', totalStars);
   return (
-    <div className={classes.root}>
-      <div className="my-star-rating">
-        <Box component="fieldset" mb={2} borderColor="transparent">
-          <Typography variant="h3">
-            {
-            averageRating ? averageRating : <CircularProgress />
-          }
-          </Typography>
-          <Rating
-            name="my-star-rating"
-            // Initial value to each star component when its made
-            value={averageRating}
-            precision={.25}
-            onChange={(event, newValue) => {
-              setStars(newValue);
-            }}
-          />
-        </Box>
+    <div>
+      <div>
+        <RatingsStarRating reviews={props.reviews}/>
       </div>
-      <LinearProgress value={progress} />
+
+      <div>
+        <RatingsLinearProgress reviews={props.reviews} />
+      </div>
+      <br />
+      <br />
+      <div>
+        <RatingsSize reviews={props.reviews}/>
+      </div>
+      <div>
+        comfort
+      </div>
     </div>
   );
 }
