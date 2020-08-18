@@ -6,18 +6,22 @@ export default function RatingsLinearProgress(props) {
   props.productsMetaData.ratings ? ratings = props.productsMetaData.ratings : console.log('waiting to assign ratings');
 
   const totalStars = Math.floor(Object.keys(ratings).reduce((sum, key) => sum + ratings[key], 0));
+  const numbers = [5, 4, 3, 2, 1];
   return (
-    <div>
-      <u>5 stars</u>
-      <LinearProgress variant="determinate" value={(ratings[5] ? (ratings[5] / totalStars) * 100 : 0)} />
-      <u>4 stars</u>
-      <LinearProgress variant="determinate" value={(ratings[4] ? (ratings[4] / totalStars) * 100 : 0)} />
-      <u>3 stars</u>
-      <LinearProgress variant="determinate" value={(ratings[3] ? (ratings[3] / totalStars) * 100 : 0)} />
-      <u>2 stars</u>
-      <LinearProgress variant="determinate" value={(ratings[2] ? (ratings[2] / totalStars) * 100 : 0)} />
-      <u>1 stars</u>
-      <LinearProgress variant="determinate" value={(ratings[1] ? (ratings[1] / totalStars) * 100 : 0)} />
-    </div>
+    <ul>
+      {numbers.map((number) => (
+        <li key={number.toString()}>
+          <u>
+            {number}
+            {' '}
+            stars
+          </u>
+          <LinearProgress
+            variant="determinate"
+            value={(ratings[number] ? (ratings[number] / totalStars) * 100 : 0)}
+          />
+        </li>
+      ))}
+    </ul>
   );
 }
