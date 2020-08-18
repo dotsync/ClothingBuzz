@@ -22,8 +22,9 @@ function RatingsBreakdown(props) {
     fetchProductsMetaData();
   }, []);
 
-  console.log(`Product id:${productId} Meta Data: ${productsMetaData}`);
-
+  // check to see if meta data has loaded
+  if (!productsMetaData) { return (<div>loading meta ratings</div>); }
+  console.log(`Product id:${productId} Meta Data:`, productsMetaData);
   return (
     <div>
       <div>

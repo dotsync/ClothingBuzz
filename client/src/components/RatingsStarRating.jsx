@@ -1,30 +1,40 @@
 import React, { useState, useEffect } from 'react';
 
-import { Grid, Box, Typography, CircularProgress } from '@material-ui/core/';
+import {
+  Grid, Box, Typography, CircularProgress,
+} from '@material-ui/core/';
 import CheckIcon from '@material-ui/icons/Check';
 import Rating from '@material-ui/lab/Rating';
 
 export default function RatingsStarRating(props) {
-  const [stars, setStars] = React.useState();
+  const [stars, setStars] = React.useState(0);
+  console.log('Meta data passed to RatingsStarRating: .ratings: ', props.productsMetaData.ratings);
 
-  console.log('Meta data passed to RatingsStarRating: ', props.productsMetaData);
-
-  let averageRating = 0
+  const myAverageRating = (ratingsObject) => {
+    /** Justification: Adds all ratings for a given product up and returns an average
+     * Input: an object
+     * Output: a number, which is the average of all the other numbers added together
+     * Visualization: {ratings: {1: 7, 3: 1, 4: 2, 5: 7}}
+     * Explanation: Takes in an object and adds all the values
+           together and divides them by the length of the keys
+     * Approximation: below */
+    // psuedocode
+  };
 
   return (
     <div className="overall-star-rating">
       <Box component="fieldset" mb={2} borderColor="transparent">
         <Typography variant="h3">
           {
-            averageRating || <CircularProgress />
+            myAverageRating(props.productsMetaData.ratings) || <CircularProgress />
           }
         </Typography>
         <Rating
           name="overall-star-rating"
-          value={averageRating}
+          value={myAverageRating(props.productsMetaData.ratings)}
           precision={0.25}
           onChange={(event, newValue) => {
-            setStars(newValue);
+            setStars(myAverageRating(props.productsMetaData.ratings));
           }}
         />
       </Box>
