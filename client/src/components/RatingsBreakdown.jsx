@@ -4,6 +4,7 @@ import RatingsLinearProgress from './RatingsLinearProgress.jsx';
 import RatingsStarRating from './RatingsStarRating.jsx';
 import RatingsSize from './RatingsSize.jsx';
 import RatingsCharacteristics from './RatingsCharacteristics.jsx';
+import RatingsPercent from './RatingsPercent.jsx';
 
 // need this line of code in order to run async funcs
 const regeneratorRuntime = require('regenerator-runtime');
@@ -34,6 +35,7 @@ function RatingsBreakdown(props) {
       <div>
         <RatingsStarRating productsMetaData={productsMetaData} />
         <RatingsLinearProgress productsMetaData={productsMetaData} />
+        <RatingsPercent productsMetaData={productsMetaData} />
         <RatingsCharacteristics productsMetaData={productsMetaData} />
       </div>
     </div>
