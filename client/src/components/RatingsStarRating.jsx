@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
 import {
-  Grid, Box, Typography, CircularProgress,
+  Box, Typography, CircularProgress,
 } from '@material-ui/core/';
 import CheckIcon from '@material-ui/icons/Check';
 import Rating from '@material-ui/lab/Rating';
 
 export default function RatingsStarRating(props) {
-  const [stars, setStars] = React.useState(0);
+  const [averageStars, setAverageStars] = React.useState(0);
   console.log('Meta data passed to RatingsStarRating: .ratings: ', props.productsMetaData.ratings);
 
   const myAverageRating = (ratingsObject) => {
@@ -21,8 +21,7 @@ export default function RatingsStarRating(props) {
     // psuedocode
     // create a result
     const summed = Object.keys(ratingsObject).reduce((sum, key) => sum + ratingsObject[key], 0);
-    console.log('summed', summed);
-    // divide the sum by the length of
+    // divide the sum by the length
     const avged = summed / Object.keys(ratingsObject).length;
     return avged;
   };
@@ -40,7 +39,7 @@ export default function RatingsStarRating(props) {
           value={myAverageRating(props.productsMetaData.ratings)}
           precision={0.25}
           onChange={(event, newValue) => {
-            setStars(myAverageRating(props.productsMetaData.ratings));
+            setAverageStars(myAverageRating(props.productsMetaData.ratings));
           }}
         />
       </Box>

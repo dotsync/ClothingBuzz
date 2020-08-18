@@ -29,6 +29,7 @@ function RatingsBreakdown(props) {
     <div>
       <div>
         <RatingsStarRating productsMetaData={productsMetaData} />
+        <RatingsLinearProgress productsMetaData={productsMetaData} />
       </div>
     </div>
   );
