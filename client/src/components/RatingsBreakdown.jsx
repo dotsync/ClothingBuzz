@@ -5,11 +5,10 @@ import RatingsStarRating from './RatingsStarRating.jsx';
 import RatingsSize from './RatingsSize.jsx';
 
 function RatingsBreakdown(props) {
-  // GET meta data
   const api = 'http://52.26.193.201:3000';
   const [productId, setProductId] = useState(5);
-  const [productsMetaData, setProductsMetaData] = useState({});
-
+  const [productsMetaData, setProductsMetaData] = useState();
+  // GET meta data
   useEffect(() => {
     async function fetchProductsMetaData() {
       try {
@@ -22,23 +21,13 @@ function RatingsBreakdown(props) {
     }
     fetchProductsMetaData();
   }, []);
-  console.log('productsMetaData', productsMetaData);
+
+  console.log(`Product id:${productId} Meta Data: ${productsMetaData}`);
+
   return (
     <div>
       <div>
-        <RatingsStarRating reviews={props.reviews} />
-      </div>
-
-      <div>
-        <RatingsLinearProgress reviews={props.reviews} />
-      </div>
-      <br />
-      <br />
-      <div>
-        <RatingsSize reviews={props.reviews} />
-      </div>
-      <div>
-        comfort
+        <RatingsStarRating productsMetaData={productsMetaData} />
       </div>
     </div>
   );
