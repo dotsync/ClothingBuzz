@@ -19,6 +19,12 @@ export default function RatingsStarRating(props) {
            together and divides them by the length of the keys
      * Approximation: below */
     // psuedocode
+    // create a result
+    const summed = Object.keys(ratingsObject).reduce((sum, key) => sum + ratingsObject[key], 0);
+    console.log('summed', summed);
+    // divide the sum by the length of
+    const avged = summed / Object.keys(ratingsObject).length;
+    return avged;
   };
 
   return (
