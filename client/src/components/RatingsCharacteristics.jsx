@@ -1,14 +1,24 @@
 import React from 'react';
 
-export default function RatingsRecommendedPercentage(props) {
+export default function RatingsCharacteristics(props) {
   let productCharacteristics;
   props.productsMetaData.characteristics
     ? productCharacteristics = props.productsMetaData.characteristics
     : console.log('characteristics is likely undefined... waiting to assign meta ratings');
   console.log('CHARACTERISTICS: ', productCharacteristics);
+  const characteristicsArray = [];
+
+  // characteristics: {
+  //    Comfort: {id: 16, value: "3.0000"}
+  //    Quality: {id: 17, value: "2.8571"}
+  //    Size: {id: 14, value: "2.7143"}
+  //    Width: {id: 15, value: "2.5714"}
+  //  }
+
+
   return (
     <div>
-      hello from RatingsRecommendedPercentage component
+      hello from RatingsCharacteristics
     </div>
   );
 }

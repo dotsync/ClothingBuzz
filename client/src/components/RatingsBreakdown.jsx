@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import RatingsLinearProgress from './RatingsLinearProgress.jsx';
 import RatingsStarRating from './RatingsStarRating.jsx';
 import RatingsSize from './RatingsSize.jsx';
-import RatingsRecommendedPercentage from './RatingsRecommendedPercentage.jsx';
+import RatingsCharacteristics from './RatingsCharacteristics.jsx';
 
 function RatingsBreakdown(props) {
   const api = 'http://52.26.193.201:3000';
@@ -31,7 +31,7 @@ function RatingsBreakdown(props) {
       <div>
         <RatingsStarRating productsMetaData={productsMetaData} />
         <RatingsLinearProgress productsMetaData={productsMetaData} />
-        <RatingsRecommendedPercentage productsMetaData={productsMetaData} />
+        <RatingsCharacteristics productsMetaData={productsMetaData} />
       </div>
     </div>
   );
