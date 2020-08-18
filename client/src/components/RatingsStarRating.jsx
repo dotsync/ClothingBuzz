@@ -8,7 +8,7 @@ import Rating from '@material-ui/lab/Rating';
 
 export default function RatingsStarRating(props) {
   const [averageStars, setAverageStars] = React.useState(0);
-  console.log('Meta data passed to RatingsStarRating: .ratings: ', props.productsMetaData.ratings);
+  // console.log('Meta data passed to RatingsStarRating: .ratings: ', props.productsMetaData.ratings);
 
   const myAverageRating = (ratingsObject) => {
     /** Justification: Adds all ratings for a given product up and returns an average
