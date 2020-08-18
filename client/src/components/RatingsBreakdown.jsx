@@ -5,6 +5,9 @@ import RatingsStarRating from './RatingsStarRating.jsx';
 import RatingsSize from './RatingsSize.jsx';
 import RatingsCharacteristics from './RatingsCharacteristics.jsx';
 
+// need this line of code in order to run async funcs
+const regeneratorRuntime = require('regenerator-runtime');
+
 function RatingsBreakdown(props) {
   const api = 'http://52.26.193.201:3000';
   const [productId, setProductId] = useState(5);
