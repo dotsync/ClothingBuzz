@@ -16,6 +16,11 @@ export default function RatingsCharacteristics(props) {
   //  }
 
 
+  // create an array of values to map over
+    // at each characteristic
+      // display the value as a percentage out of 100
+
+
   return (
     <div>
       hello from RatingsCharacteristics
