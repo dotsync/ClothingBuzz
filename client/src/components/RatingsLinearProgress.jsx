@@ -5,7 +5,6 @@ export default function RatingsLinearProgress(props) {
   let totalPossibleStars = 0;
   let averageRating = 0;
   const { reviews } = props;
-  console.log('RatingsBreakdowns', props.reviews);
   // get average
   reviews.map((item) => totalPossibleStars += 5);
   averageRating = totalPossibleStars / reviews.length;
@@ -31,7 +30,7 @@ export default function RatingsLinearProgress(props) {
   // current item times multiplier gives racalibrated amount
   // console.log('multiplier', Math.floor(multiplier));
 
-  console.log('amount of stars', totalPossibleStars);
+  // console.log('amount of stars', totalPossibleStars);
 
   return (
     <div>
@@ -45,7 +44,7 @@ export default function RatingsLinearProgress(props) {
       <LinearProgress variant="determinate" value={starItems.two * totalPossibleStars} />
       <u>1 stars</u>
       <LinearProgress variant="determinate" value={starItems.one * totalPossibleStars} />
-    {console.log('added ratings up',
+    {/* {console.log('added ratings up',
 
         (starItems.one * totalPossibleStars) +
         (starItems.two * totalPossibleStars) +
@@ -53,7 +52,7 @@ export default function RatingsLinearProgress(props) {
         (starItems.four * totalPossibleStars) +
         (starItems.five * totalPossibleStars)
 
-    )}
+    )} */}
     </div>
   )
 }

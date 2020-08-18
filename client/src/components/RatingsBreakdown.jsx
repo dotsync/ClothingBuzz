@@ -1,39 +1,32 @@
-/* eslint-disable no-console */
-/* eslint-disable react/prefer-stateless-function */
 import React, { useState, useEffect } from 'react';
 // material ui
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import CheckIcon from '@material-ui/icons/Check';
-import Box from '@material-ui/core/Box';
-import Rating from '@material-ui/lab/Rating';
-import { decomposeColor } from '@material-ui/core';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import RatingsLinearProgress from './RatingsLinearProgress.jsx';
 import RatingsStarRating from './RatingsStarRating.jsx';
-import RatingsSize from './RatingsSize.jsx'
-
-import StarRating from './StarRating.jsx';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'left',
-    color: theme.palette.text.secondary,
-  },
-}));
+import RatingsSize from './RatingsSize.jsx';
 
 function RatingsBreakdown(props) {
+  // GET meta data
+  const api = 'http://52.26.193.201:3000';
+  const [productId, setProductId] = useState(5);
+  const [productsMetaData, setProductsMetaData] = useState({});
+
+  useEffect(() => {
+    async function fetchProductsMetaData() {
+      try {
+        const response = await fetch(`${api}/reviews/${productId}/meta`);
+        const product = await response.json();
+        setProductsMetaData(product);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    fetchProductsMetaData();
+  }, []);
+  console.log('productsMetaData', productsMetaData);
   return (
     <div>
       <div>
-        <RatingsStarRating reviews={props.reviews}/>
+        <RatingsStarRating reviews={props.reviews} />
       </div>
 
       <div>
@@ -42,7 +35,7 @@ function RatingsBreakdown(props) {
       <br />
       <br />
       <div>
-        <RatingsSize reviews={props.reviews}/>
+        <RatingsSize reviews={props.reviews} />
       </div>
       <div>
         comfort

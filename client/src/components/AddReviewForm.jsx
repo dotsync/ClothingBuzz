@@ -23,24 +23,26 @@
  * ****FIT-------Runs tight----------Runs slightly tight--------------Perfect-----------Runs slightly long-----------Runs long
  * ***********************************************************************************************************************************
  */
-
+import axios from 'axios';
 import React, { useState, UseEffect } from 'react';
 // Mui imports
-import { Grid } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
 
-import { useForm, Form } from './useForm.jsx';
-import Controls from './controls/Controls.jsx';
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { decomposeColor } from '@material-ui/core';
+import Controls from './controls/Controls.jsx';
+import { useForm, Form } from './useForm.jsx';
+
+const regeneratorRuntime = require('regenerator-runtime');
 
 const myRecommendationItems = [
   { id: 'yes', title: 'Yes' },
   { id: 'no', title: 'No' },
 ];
 const myReviewStarRatingItems = [
-  { id: 1, title: '1' },
+  { id: '1', title: '1' },
   { id: '2', title: '2' },
   { id: '3', title: '3' },
   { id: '4', title: '4' },
@@ -48,76 +50,81 @@ const myReviewStarRatingItems = [
 ];
 // Characteristics
 const myReviewSizeItems = [
-  { id: 'a size too small', title: 'a size too small' },
-  { id: '1/2 size too small', title: '1/2 size too small' },
-  { id: 'Perfect', title: 'Perfect' },
-  { id: '1/2 size too big', title: '1/2 size too big' },
-  { id: 'a size too wide', title: 'a size too wide' },
+  { id: '1', title: 'a size too small' },
+  { id: '2', title: '1/2 size too small' },
+  { id: '3', title: 'Perfect' },
+  { id: '4', title: '1/2 size too big' },
+  { id: '5', title: 'a size too wide' },
 ];
 const myReviewWidthItems = [
-  { id: 'too narrow', title: 'too narrow' },
-  { id: 'slightly narrow', title: 'slightly narrow' },
-  { id: 'Perfect', title: 'Perfect' },
-  { id: 'slightly wide', title: 'slightly wide' },
-  { id: 'too wide', title: 'too wide' },
+  { id: '1', title: 'too narrow' },
+  { id: '2', title: 'slightly narrow' },
+  { id: '3', title: 'Perfect' },
+  { id: '4', title: 'slightly wide' },
+  { id: '5', title: 'too wide' },
 ];
 const myReviewComfortItems = [
-  { id: 'uncomfortable', title: 'uncomfortable' },
-  { id: 'slightly uncomfortable', title: 'slightly uncomfortable' },
-  { id: 'Ok', title: 'Ok' },
-  { id: 'comfortable', title: 'comfortable' },
-  { id: 'Perfect', title: 'perfect' },
+  { id: '1', title: 'uncomfortable' },
+  { id: '2', title: 'slightly uncomfortable' },
+  { id: '3', title: 'Ok' },
+  { id: '4', title: 'comfortable' },
+  { id: '5', title: 'perfect' },
 ];
 const myReviewQualityItems = [
-  { id: 'Poor', title: 'poor' },
-  { id: 'below average', title: 'below average' },
-  { id: 'what i expected', title: 'what i expected' },
-  { id: 'pretty great', title: 'pretty great' },
-  { id: 'Perfect', title: 'Perfect' },
+  { id: '1', title: 'poor' },
+  { id: '2', title: 'below average' },
+  { id: '3', title: 'what i expected' },
+  { id: '4', title: 'pretty great' },
+  { id: '5', title: 'Perfect' },
 ];
 const myReviewLengthItems = [
-  { id: 'runs short', title: 'runs short' },
-  { id: 'runs slightly short', title: 'runs slightly short' },
-  { id: 'perfect', title: 'Perfect' },
-  { id: 'runs slightly long', title: 'runs slightly long' },
-  { id: 'runs long', title: 'runs long' },
+  { id: '1', title: 'runs short' },
+  { id: '2', title: 'runs slightly short' },
+  { id: '3', title: 'Perfect' },
+  { id: '4', title: 'runs slightly long' },
+  { id: '5', title: 'runs long' },
 ];
 const myReviewFitItems = [
-  { id: 'runs tight', title: 'runs tight' },
-  { id: 'runs slightly tight', title: 'runs slightly tight' },
-  { id: 'perfect', title: 'Perfect' },
-  { id: 'runs slightly long', title: 'runs slightly long' },
-  { id: 'runs long', title: 'runs long' },
+  { id: '1', title: 'runs tight' },
+  { id: '2', title: 'runs slightly tight' },
+  { id: '3', title: 'Perfect' },
+  { id: '4', title: 'runs slightly long' },
+  { id: '5', title: 'runs long' },
 ];
 
 const initialFormValues = {
-  review_id: 0,
-  reviewer_name: '',
-  email: '',
-  recommend: null,
-  rating: null,
-  summary: '',
-  body: '',
+  body: 'asdgdshfdhhrsesdfgdfkjashfjkdsklgjerigrlkgjsdjgklsdajgkdsjhjkgdsjkgjsdjfkasfjklasjfkasfjdklasfjsaklgf',
+  date: '2019-10-25T00:00:00.000Z',
+  helpfulness: 1,
   photos: [],
-  myReviewSize: '',
-  myReviewWidth: '',
-  myReviewComfort: '',
-  myReviewQuality: '',
-  myReviewLength: '',
-  myReviewFit: '',
+  rating: null,
+  recommend: 1,
+  response: null,
+  review_id: 94567,
+  reviewer_name: 'adsaf',
+  summary: 'sfsdfhfdgjfg',
+  // characteristics: {
+  //   myReviewSize: '',
+  //   myReviewWidth: '',
+  //   myReviewComfort: '',
+  //   myReviewQuality: '',
+  //   myReviewLength: '',
+  //   myReviewFit: '',
+  // },
 };
 
 function AddReviewForm(props) {
   // console.log('from AddReviewForm component: props.reviews = ', props.reviews);
   // console.log('from AddReviewForm component: initialFormValues = ', initialFormValues);
+  const api = 'http://52.26.193.201:3000';
 
-  const [stars, setStars] = React.useState();
+  const [stars, setStars] = React.useState(null);
   const {
     values,
     setValues,
     handleInputChange,
   } = useForm(initialFormValues);
-
+  values.rating = stars;
   return (
     <Form disableScrollLock={false}>
       <Grid container>
@@ -129,12 +136,12 @@ function AddReviewForm(props) {
             value={values.reviewer_name}
             onChange={handleInputChange}
           />
-          <Controls.Input
+          {/* <Controls.Input
             label="Email"
             name="email"
             value={values.email}
             onChange={handleInputChange}
-          />
+          /> */}
           <Controls.RadioGroup
             label="Do you recommend this product?"
             name="recommend"
@@ -147,16 +154,14 @@ function AddReviewForm(props) {
         {/* Right side of form */}
         <Grid item xs={6}>
           {/* overall rating */}
-          <div className="my-star-rating">
+          <div className="my-star-rating-form">
             <Box component="fieldset" mb={2} borderColor="transparent">
               <Rating
-                name="my-star-rating"
+                name="my-star-rating-form"
                 // Initial value to each star component when its made
                 value={values.rating}
                 onChange={(event, newValue) => {
                   setStars(newValue);
-                  values.rating = newValue;
-                  console.log(values.rating);
                 }}
               />
               {/* {console.log('from <StarRating/> reviews:', props.reviews)} */}
@@ -231,9 +236,69 @@ function AddReviewForm(props) {
             onChange={handleInputChange}
             items={myReviewFitItems}
           />
+          <Button
+            variant="contained"
+            onClick={() => {
+              console.log('ouch u clikc submit review');
+              // greenfield api
+              const results = [];
+              results.push(values);
+              axios.post(`${api}/reviews/5`, values);
+              // // initial form values for creating a new review
+              // // INCOMPLETE
+              // async function addMyReview() {
+              //   try {
+              //     const response = await fetch(`${api}/reviews/5`, {
+              //       method: 'POST',
+              //       headers: {
+              //         'Content-Type': 'application/json;charset=utf-8',
+              //       },
+              //       body: JSON.stringify(values),
+              //     });
+              //     const result = await response.json();
+              //     // set state if necessary
+              //   } catch (err) {
+              //     console.log('Error adding review <AddReview />:', err);
+              //   }
+              // }
+              // addMyReview()
+            }}
+          >
+            Submit
+          </Button>
         </Grid>
       </Grid>
     </Form>
   );
 }
 export default AddReviewForm;
+
+// my example post
+// {
+//   "body" : "and amazing product and this is what i have to say about it when im saying these things i reflect on how awesome the product wasand amazing product and this is what i have to say about it when im saying these things i reflect on how awesome the product wasand amazing product and this is what i have to say about it when im saying these things i reflect on how awesome the product was",
+//   "email": "testers@email@notreal",
+//   "photos": [],
+//   "rating": "5",
+//   "recommend": "1",
+//   "review_id": "5",
+//   "reviewer_name": "HardCoded",
+//   "summary": "Was really good",
+//   "characteristics": {
+//           "Size": {
+//               "id": 14,
+//               "value": "2.7143"
+//           },
+//           "Width": {
+//               "id": 15,
+//               "value": "2.5714"
+//           },
+//           "Comfort": {
+//               "id": 16,
+//               "value": "3.0000"
+//           },
+//           "Quality": {
+//               "id": 17,
+//               "value": "2.8571"
+//           }
+//       }
+//   };

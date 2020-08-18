@@ -17,7 +17,6 @@ export default function RatingsStarRating(props) {
   let totalStars = 0;
   let averageRating = 0;
   const { reviews } = props;
-  console.log('RatingsBreakdowns', props.reviews);
   // get average
   reviews.map((item) => totalStars += item.rating);
   averageRating = totalStars / reviews.length;

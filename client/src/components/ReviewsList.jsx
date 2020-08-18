@@ -30,47 +30,33 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Main component
-function ReviewsList(props) {
+export default function ReviewsList(props) {
   // greenfield api
   const api = 'http://52.26.193.201:3000';
   const [productId, setProductId] = useState(5);
   const [reviews, setReviews] = useState([]);
-  // state is not loaded at first
-  const [loaded, setLoaded] = useState(false);
+  const [reviewsLimit, setReviewsLimit] = useState(2);
   // use material ui styles
   const classes = useStyles();
 
-  const [reviewsLimit, setReviewsLimit] = useState(2);
+  const limitedArray = reviews.slice(0, reviewsLimit);
+  // console.log('limitedArray', limitedArray);
 
   const handleAdditionalReviews = () => {
-    //let limitedArray = reviews.slice(0, 3);
     console.log('hello from handleClick', reviewsLimit);
     setReviewsLimit(reviewsLimit + 1);
-    //limitedArray = reviews.slice(0, limit);
   };
-  // fetch product id
-  // useEffect(() => {
-  //   async function fetchProductId() {
-  //     try {
-  //       // setProductId
-  //     } catch (err) {
-  //       console.log(`fetchProductId ${err}`);
-  //     }
-  //   }
-  //   fetchProductId();
-  // }, []);
 
   useEffect(() => {
     async function fetchReviews() {
       try {
         const response = await fetch(`${api}/reviews/${productId}/list`);
+        console.log('RESPONSE FROM SERVER', response.body);
         const product = await response.json();
         // console.log(response);
         // console.log('product.results', product.results);
         // update state of reviews
         setReviews(product.results);
-        // setLoaded = true so now props can safely render
-        setLoaded(true);
       } catch (err) {
         console.log(err);
       }
@@ -79,13 +65,6 @@ function ReviewsList(props) {
     fetchReviews();
   }, []);
 
-  // should be an array of review objects
-  // [{},{},{},{},{}]
-  const thisProductsReviews = reviews;
-  // console.log('thisProductsReviews', thisProductsReviews);
-
-  const limitedArray = reviews.slice(0, reviewsLimit);
-  // console.log('limitedArray', limitedArray);
   return (
     <div className={classes.root}>
       <Grid container>
@@ -104,9 +83,6 @@ function ReviewsList(props) {
         {/* Right column grid */}
         <Grid item xs={7}>
           {/* If reviews are ready */}
-          {/* DEVELOPER CONSOLE LOGS PRE-MAP */}
-          {/* {console.log(' For development, Refer to these props at thisProductsReviews', thisProductsReviews)} */}
-
           {reviews.length > 0
             // eslint-disable-next-line max-len
             ? limitedArray.map((review) => (
@@ -117,15 +93,6 @@ function ReviewsList(props) {
             // else still loading
             : 'Waiting for reviews'}
         </Grid>
-
-
-
-        {/* const [reviewsLimit, setReviewsLimit] = useState(); */}
-
-
-
-
-        {/* Footer grid */}
 
         {/* closing container, and item tags */}
       </Grid>
@@ -145,5 +112,3 @@ function ReviewsList(props) {
 
   );
 }
-
-export default ReviewsList;
