@@ -2,13 +2,10 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { useState } from 'react';
 // material ui
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import {
+  makeStyles, Grid, Typography, Divider, Paper, Button,
+} from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
-import Box from '@material-ui/core/Box';
-import Divider from '@material-ui/core/Divider';
 
 // Family components
 import StarRating from './StarRating.jsx';
@@ -28,14 +25,21 @@ const useStyles = makeStyles((theme) => ({
 function ReviewTile(props) {
   const thisProductsReviews = props.reviews;
   // how do i get rid of the line below
-  const [productId, setProductId] = useState();
+  // const [productId, setProductId] = useState(5);
   // material ui classes
   const classes = useStyles();
 
+  const handleYes = () => {
+    console.log('clicked yes');
+  };
+  const handleReport = () => {
+    console.log('clicked report');
+  };
   // conditional render
   if (props.reviews.length === 0) {
     return <div>Loading reviews...</div>;
   }
+  console.log(props.reviews);
   return (
     <div className={classes.root}>
       <Paper>
@@ -45,7 +49,9 @@ function ReviewTile(props) {
           {/* {console.log('starssss', thisProductsReviews.ratings)} */}
           {thisProductsReviews.rating < 1
             ? console.log('rating is greater than 1')
-            : <Grid item xs={3}><StarRating reviews={props.reviews}/></Grid>}
+            : <Grid item xs={3}><StarRating reviews={props.reviews} /></Grid>}
+          {thisProductsReviews.reviewer_name}
+          ,
           {thisProductsReviews.date.slice(0, 10)}
         </Grid>
 
@@ -72,14 +78,22 @@ function ReviewTile(props) {
           Helpful?
           {' '}
           {/* TODO: When i click i yes do something */}
-          <u>yes</u>
+          <u>
+            <Button onClick={handleYes}>
+              yes
+            </Button>
+          </u>
           {' '}
           (
           {thisProductsReviews.helpfulness}
           ) |
           {' '}
           {/* TODO: When i click i report do something */}
-          <u>report</u>
+          <u>
+            <Button onClick={handleReport}>
+              report
+            </Button>
+          </u>
           <Divider variant="middle" />
         </Grid>
       </Paper>

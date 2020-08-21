@@ -43,7 +43,6 @@ export default function ReviewsList(props) {
   // console.log('limitedArray', limitedArray);
 
   const handleAdditionalReviews = () => {
-    console.log('hello from handleClick', reviewsLimit);
     setReviewsLimit(reviewsLimit + 1);
   };
 
@@ -51,7 +50,6 @@ export default function ReviewsList(props) {
     async function fetchReviews() {
       try {
         const response = await fetch(`${api}/reviews/${productId}/list`);
-        console.log('RESPONSE FROM SERVER', response.body);
         const product = await response.json();
         // console.log(response);
         // console.log('product.results', product.results);
