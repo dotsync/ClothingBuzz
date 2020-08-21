@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable react/prefer-stateless-function */
 import React, { useState } from 'react';
+import axios from 'axios';
 // material ui
 import {
   makeStyles, Grid, Typography, Divider, Paper, Button,
@@ -24,14 +25,26 @@ const useStyles = makeStyles((theme) => ({
 
 function ReviewTile(props) {
   const thisProductsReviews = props.reviews;
-  // how do i get rid of the line below
-  // const [productId, setProductId] = useState(5);
+  const api = 'http://52.26.193.201:3000';
+  const [helpfull, setHelpfull] = useState(thisProductsReviews.helpfulness);
   // material ui classes
   const classes = useStyles();
 
   const handleYes = () => {
     console.log('clicked yes');
+    // build result object to put
+    const result = { helpfulness: helpfull + 1 };
+    console.log('result', result);
+    axios.put(`${api}/reviews/helpful/${thisProductsReviews.review_id}`, result, { headers: { 'Content-Type': 'application/json' } })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setHelpfull(helpfull + 1);
   };
+
   const handleReport = () => {
     console.log('clicked report');
   };
@@ -85,7 +98,7 @@ function ReviewTile(props) {
           </u>
           {' '}
           (
-          {thisProductsReviews.helpfulness}
+          {helpfull}
           ) |
           {' '}
           {/* TODO: When i click i report do something */}
