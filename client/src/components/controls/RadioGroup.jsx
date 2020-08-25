@@ -7,6 +7,9 @@ export default function RadioGroup(props) {
   const {
     name, label, value, onChange, items,
   } = props;
+
+  // custom onchange func here?
+
   return (
     <FormControl>
       <FormLabel>{label}</FormLabel>

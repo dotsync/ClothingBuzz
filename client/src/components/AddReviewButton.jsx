@@ -50,29 +50,6 @@ function AddReview(props) {
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
 
-  // initial form values for creating a new review
-
-  // useEffect(() => {
-  //   const [values, setValues] = useState();
-  //   // INCOMPLETE
-  //   async function addMyReview() {
-  //     try {
-  //       const response = await fetch(`${api}/reviews/${productId}`, {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json;charset=utf-8',
-  //         },
-  //         body: JSON.stringify(userReview),
-  //       });
-  //       const result = await response.json();
-  //       // set state if necessary
-  //     } catch (err) {
-  //       console.log('Error adding review <AddReview />:', err);
-  //     }
-  //   }
-  //   console.log('posted a review');
-  // }, []);
-
   const handleOpen = () => {
     setOpen(true);
   };

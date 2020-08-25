@@ -4,8 +4,7 @@
 import React, { useState, useEffect } from 'react';
 // import material ui
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+import { Grid } from '@material-ui/core';
 
 import AddReviewButton from './AddReviewButton.jsx';
 import MoreReviewsButton from './MoreReviewsButton.jsx';
@@ -40,19 +39,16 @@ export default function ReviewsList(props) {
   const classes = useStyles();
 
   const limitedArray = reviews.slice(0, reviewsLimit);
-  // console.log('limitedArray', limitedArray);
-
+  console.log('limitedArray', limitedArray);
+  console.log('reviews', reviews);
   const handleAdditionalReviews = () => {
     setReviewsLimit(reviewsLimit + 1);
   };
-
   useEffect(() => {
-    async function fetchReviews() {
+    async function fetchReviews(count) {
       try {
-        const response = await fetch(`${api}/reviews/${productId}/list`);
+        const response = await fetch(`${api}/reviews/${productId}/list?count=${count}`);
         const product = await response.json();
-        // console.log(response);
-        // console.log('product.results', product.results);
         // update state of reviews
         setReviews(product.results);
       } catch (err) {
@@ -60,7 +56,7 @@ export default function ReviewsList(props) {
       }
     }
     // call immediatly
-    fetchReviews();
+    fetchReviews(10);
   }, []);
 
   return (
@@ -85,7 +81,7 @@ export default function ReviewsList(props) {
             // eslint-disable-next-line max-len
             ? limitedArray.map((review) => (
               <Grid key={review.review_id}>
-                <ReviewTile reviews={review} />
+                <ReviewTile reviews={review} reviewsLimit={reviewsLimit} productId={productId} />
               </Grid>
             ))
             // else still loading
