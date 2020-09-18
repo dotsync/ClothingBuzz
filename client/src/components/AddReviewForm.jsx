@@ -180,7 +180,7 @@ function AddReviewForm(props) {
           {/* body */}
           <Controls.Input
             multiline
-            label="Body"\
+            label="Body"
             name="body"
             value={values.body}
             onChange={handleInputChange}
