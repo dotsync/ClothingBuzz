@@ -1,11 +1,13 @@
+/* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable react/prefer-stateless-function */
 import React, { useState, useEffect } from 'react';
 // import material ui
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Grid';
+import { Grid } from '@material-ui/core';
 
+import AddReviewButton from './AddReviewButton.jsx';
+import MoreReviewsButton from './MoreReviewsButton.jsx';
 import ReviewTile from './ReviewTile.jsx';
 import StarRating from './StarRating.jsx';
 import RatingsBreakdown from './RatingsBreakdown.jsx';
@@ -27,51 +29,36 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Main component
-function ReviewsList(props) {
+export default function ReviewsList(props) {
   // greenfield api
   const api = 'http://52.26.193.201:3000';
   const [productId, setProductId] = useState(5);
   const [reviews, setReviews] = useState([]);
-  // state is not loaded at first
-  const [loaded, setLoaded] = useState(false);
+  const [reviewsLimit, setReviewsLimit] = useState(2);
   // use material ui styles
   const classes = useStyles();
 
-  // fetch product id
-  // useEffect(() => {
-  //   async function fetchProductId() {
-  //     try {
-  //       // setProductId
-  //     } catch (err) {
-  //       console.log(`fetchProductId ${err}`);
-  //     }
-  //   }
-  //   fetchProductId();
-  // }, []);
-
+  const limitedArray = reviews.slice(0, reviewsLimit);
+  console.log('limitedArray', limitedArray);
+  console.log('reviews', reviews);
+  const handleAdditionalReviews = () => {
+    setReviewsLimit(reviewsLimit + 1);
+  };
   useEffect(() => {
-    async function fetchReviews() {
+    async function fetchReviews(count) {
       try {
-        const response = await fetch(`${api}/reviews/${productId}/list`);
+        const response = await fetch(`${api}/reviews/${productId}/list?count=${count}`);
         const product = await response.json();
-        // console.log(response);
-        // console.log('product.results', product.results);
         // update state of reviews
         setReviews(product.results);
-        // setLoaded = true so now props can safely render
-        setLoaded(true);
       } catch (err) {
         console.log(err);
       }
     }
     // call immediatly
-    fetchReviews();
+    fetchReviews(10);
   }, []);
 
-  // should be an array of review objects
-  // [{},{},{},{},{}]
-  const thisProductsReviews = reviews;
-  console.log('thisProductsReviews', thisProductsReviews);
   return (
     <div className={classes.root}>
       <Grid container>
@@ -82,7 +69,7 @@ function ReviewsList(props) {
       <Grid container spaceing={2}>
         <Grid item xs={1} />
         <Grid item xs={3}>
-          <RatingsBreakdown />
+          <RatingsBreakdown reviews={reviews} />
         </Grid>
 
         {/* add a product breakdown component here */}
@@ -90,38 +77,32 @@ function ReviewsList(props) {
         {/* Right column grid */}
         <Grid item xs={7}>
           {/* If reviews are ready */}
-          {/* DEVELOPER CONSOLE LOGS PRE-MAP*/}
-          {console.log(' For development, Refer to these props at thisProductsReviews', thisProductsReviews)}
           {reviews.length > 0
             // eslint-disable-next-line max-len
-            ? reviews.map((review) => (
-              <Paper
-                // Create unique key for each review
-                key={review.review_id}
-              >
-                <ReviewTile
-                  // set
-                  reviews={review}
-                />
-                {/* DEVELOPER CONSOLE LOGS IN-MAP*/}
-                {console.log(
-                  '     review.review_id', review.review_id,
-                  '     review.helpfulness', review.helpfulness,
-                  '     review.rating', review.rating,
-                )}
-              </Paper>
+            ? limitedArray.map((review) => (
+              <Grid key={review.review_id}>
+                <ReviewTile reviews={review} reviewsLimit={reviewsLimit} productId={productId} />
+              </Grid>
             ))
             // else still loading
-            : <Paper>Hang tight...</Paper>}
+            : 'Waiting for reviews'}
         </Grid>
 
-        {/* Footer grid */}
-
         {/* closing container, and item tags */}
+      </Grid>
+      <Grid container spaceing={10}>
+        <Grid item xs={7} />
+        <Grid item xs={5}>
+          {/* <MoreReviewsButton limitedArray={limitedArray} limit={limit} /> */}
+          <MoreReviewsButton
+            reviews={reviews}
+            onClick={handleAdditionalReviews}
+          />
+          <AddReviewButton reviews={reviews} />
+          {/* <AddReview reviews={reviews} /> */}
+        </Grid>
       </Grid>
     </div>
 
   );
 }
-
-export default ReviewsList;

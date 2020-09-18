@@ -1,13 +1,12 @@
 /* eslint-disable no-console */
 /* eslint-disable react/prefer-stateless-function */
 import React, { useState } from 'react';
+import axios from 'axios';
 // material ui
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import {
+  makeStyles, Grid, Typography, Divider, Paper, Button, Modal,
+} from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
-import Box from '@material-ui/core/Box';
 
 // Family components
 import StarRating from './StarRating.jsx';
@@ -20,35 +19,122 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    elevation: 1,
+    elevation: 0,
   },
 }));
 
 function ReviewTile(props) {
   const thisProductsReviews = props.reviews;
-  // how do i get rid of the line below
-  const [productId, setProductId] = useState();
+  const api = 'http://52.26.193.201:3000';
+  const [helpfull, setHelpfull] = useState(thisProductsReviews.helpfulness);
+  const [modalStyle] = React.useState(getModalStyle);
   // material ui classes
   const classes = useStyles();
+  function rand() {
+    return Math.round(Math.random() * 20) - 10;
+  }
+
+  function getModalStyle() {
+    const top = 50 + rand();
+    const left = 50 + rand();
+
+    return {
+      top: `${top}%`,
+      left: `${left}%`,
+      transform: `translate(-${top}%, -${left}%)`,
+    };
+  }
+
+  const handleYes = () => {
+    console.log('clicked yes');
+    // build result object to put
+    const result = { helpfulness: helpfull + 1 };
+    console.log('result', result);
+    axios.put(`${api}/reviews/helpful/${thisProductsReviews.review_id}`, result, { headers: { 'Content-Type': 'application/json' } })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setHelpfull(helpfull + 1);
+  };
+
+  const handleReport = () => {
+    console.log('clicked report');
+    // build result object to put
+    const result = { report: true };
+    axios.put(`${api}/reviews/report/${thisProductsReviews.review_id}`, result, { headers: { 'Content-Type': 'application/json' } })
+      .then((res) => {
+        console.log(res);
+        // update state?
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   // conditional render
   if (props.reviews.length === 0) {
     return <div>Loading reviews...</div>;
   }
+  console.log(props.reviews);
+
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+      <h2 id="tile-modal-title">reviewd id goes here</h2>
+    </div>
+  );
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  // return (
+  //   // Create an object and push that object to the results array
+  //   <div>
+  //     <Button variant="contained" onClick={handleOpen}>
+  //       Add review
+  //     </Button>
+  // <Modal
+  //   open={open}
+  //   onClose={handleClose}
+  //   aria-labelledby="simple-modal-title"
+  //   aria-describedby="simple-modal-description"
+  // >
+  //   {body}
+
+  // </Modal>
+  //     )
+
   return (
     <div className={classes.root}>
+      {/* <Button onClick={handleOpen}> */}
+      {/* <Modal onClick={handleOpen}>
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        {body}
+
+      </Modal> */}
       <Paper>
-      <Grid container>
+        <Grid container>
 
-        {/* Review rating and date grid */}
-        {/* {console.log('starssss', thisProductsReviews.ratings)} */}
-        {thisProductsReviews.rating < 1
-          ? console.log('rating is greater than 1')
-          : <Grid item xs={3}><StarRating /></Grid>}
-        {thisProductsReviews.date.slice(0, 10)}
-      </Grid>
+          {/* Review rating and date grid */}
+          {/* {console.log('starssss', thisProductsReviews.ratings)} */}
+          {thisProductsReviews.rating < 1
+            ? console.log('rating is greater than 1')
+            : <Grid item xs={3}><StarRating reviews={props.reviews} /></Grid>}
+          {thisProductsReviews.reviewer_name}
+          ,
+          {thisProductsReviews.date.slice(0, 10)}
+        </Grid>
 
-      {/* Review contents grid */}
+        {/* Review contents grid */}
         <Typography variant="h6" gutterBottom>{thisProductsReviews.summary}</Typography>
         {thisProductsReviews.recommend
           ? (
@@ -59,7 +145,7 @@ function ReviewTile(props) {
               </Typography>
             </Grid>
           )
-          : <Grid>{console.log('product has not been recomended', thisProductsReviews.recommend)}</Grid>}
+          : <Grid><br /></Grid>}
         {thisProductsReviews.body}
         <br />
         <br />
@@ -71,16 +157,26 @@ function ReviewTile(props) {
           Helpful?
           {' '}
           {/* TODO: When i click i yes do something */}
-          <u>yes</u>
+          <u>
+            <Button onClick={handleYes}>
+              yes
+            </Button>
+          </u>
           {' '}
           (
-          {thisProductsReviews.helpfulness}
+          {helpfull}
           ) |
           {' '}
           {/* TODO: When i click i report do something */}
-          <u>report</u>
+          <u>
+            <Button onClick={handleReport}>
+              report
+            </Button>
+          </u>
+          <Divider variant="middle" />
         </Grid>
       </Paper>
+      {/* </Button> */}
       {/* closing container, and item tags */}
 
       <br />

@@ -1,77 +1,43 @@
 import React, { useState, useEffect } from 'react';
-// import material ui
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Grid';
+// material ui
+import RatingsLinearProgress from './RatingsLinearProgress.jsx';
+import RatingsStarRating from './RatingsStarRating.jsx';
+import RatingsSize from './RatingsSize.jsx';
+import RatingsCharacteristics from './RatingsCharacteristics.jsx';
+import RatingsPercent from './RatingsPercent.jsx';
 
-import StarRating from './StarRating.jsx';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'left',
-    color: theme.palette.text.secondary,
-  },
-}));
+// need this line of code in order to run async funcs
+const regeneratorRuntime = require('regenerator-runtime');
 
 function RatingsBreakdown(props) {
-  const classes = useStyles();
+  const api = 'http://52.26.193.201:3000';
+  const [productId, setProductId] = useState(5);
+  const [productsMetaData, setProductsMetaData] = useState();
+  // GET meta data
+  useEffect(() => {
+    async function fetchProductsMetaData() {
+      try {
+        const response = await fetch(`${api}/reviews/${productId}/meta`);
+        const product = await response.json();
+        setProductsMetaData(product);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    fetchProductsMetaData();
+  }, []);
 
+  // check to see if meta data has loaded
+  if (!productsMetaData) { return (<div>loading meta ratings</div>); }
+  console.log(`Product id:${productId} Meta Data:`, productsMetaData);
   return (
-    <div className={classes.root}>
-      <Grid container>
-        <Grid item xs={2}>
-          <Paper className={classes.paper}>BIG NUMBER</Paper>
-        </Grid>
-        <Grid item xs={4}>
-          {/* <StarRating /> */}
-        </Grid>
-      </Grid>
-      {/* Rows of five stars */}
-      <Grid container>
-        <Grid item>
-          5 stars
-        </Grid>
-        <Grid item>
-          bar representing amount of stars given
-        </Grid>
-      </Grid>
-      <Grid container>
-        <Grid item>
-          4 stars
-        </Grid>
-        <Grid item>
-          bar representing amount of stars given
-        </Grid>
-      </Grid>
-      <Grid container>
-        <Grid item>
-          3 stars
-        </Grid>
-        <Grid item>
-          bar representing amount of stars given
-        </Grid>
-      </Grid>
-      <Grid container>
-        <Grid item>
-          2 stars
-        </Grid>
-        <Grid item>
-          bar representing amount of stars given
-        </Grid>
-      </Grid>
-      <Grid container>
-        <Grid item>
-          1 stars
-        </Grid>
-        <Grid item>
-          bar representing amount of stars given
-        </Grid>
-      </Grid>
-      {/* closing container, and item tags */}
+    <div>
+      <div>
+        <RatingsStarRating productsMetaData={productsMetaData} />
+        <RatingsLinearProgress productsMetaData={productsMetaData} />
+        <RatingsPercent productsMetaData={productsMetaData} />
+        <RatingsCharacteristics productsMetaData={productsMetaData} />
+      </div>
     </div>
   );
 }
